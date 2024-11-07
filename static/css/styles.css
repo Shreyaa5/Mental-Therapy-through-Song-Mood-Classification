@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    body {
+    font-family: Arial, sans-serif;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    margin: 0;
+    background-image: url("/static/images/bg.png");
+    background-size:cover;
+    background-position: center;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.7); 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 500px;
+    text-align: left;
+    margin-left: 1px; 
+    align-self:baseline;
+}
+
+
+ h3 {
+    color:darkslategrey;
+    text-align: left;
+}
+
+h1 {
+    color:cadetblue;
+    text-align: center;
+}
+
+form {
+    display:grid;
+    flex-direction:column;
+    align-items: center;
+}
+
+.question {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+input[type="radio"] {
+    margin: 10px 10px;
+}
+
+button {
+    padding: 10px 20px;
+    color:black;
+    background-color:lightgreen;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+    margin: 0;
+    background-image: url("/static/images/bg.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.6); 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(115, 221, 115, 0.5);
+    width: 400px;
+    text-align: left;
+    position: relative;
+    top:10px;
+    left:-450px;
+    
+    align-self:flex-start;
+}
+
+
+ h3 {
+    color:darkslategrey;
+    text-align: left;
+}
+
+h1 {
+    color:cadetblue;
+    text-align: center;
+}
+
+form {
+    display:grid;
+    flex-direction:column;
+    align-items: center;
+}
+
+.question {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+input[type="radio"] {
+    margin: 10px 10px;
+}
+
+button {
+    padding: 10px 20px;
+    color:black;
+    background-color:aquamarine;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}

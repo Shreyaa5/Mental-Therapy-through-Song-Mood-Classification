@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("/static/images/bg1.png"); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.contain{
+    background-image: url("/static/images/bg1.png");
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: left; 
+    margin-left: 20px; 
+    align-self: flex-start;
+
+}
+.container {
+    background-color: azure;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: left; 
+    margin-left: 20px; 
+    align-self: flex-start; 
+
+h2, h1 {
+    color: #333;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+h3 {
+    color: darkslategrey;
+    margin-bottom: 15px;
+}
+
+form {
+    display: grid;
+    gap: 10px; 
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.question {
+    margin-bottom: 15px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="radio"] {
+    margin: 0 5px 0 0; 
+}
+
+button {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+p {
+    margin-top: 15px;
+    text-align: center;
+}
+
+

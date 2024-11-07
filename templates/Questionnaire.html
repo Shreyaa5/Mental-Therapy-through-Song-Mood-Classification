@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Questionnaire</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, ['username']</h1>
+        <h3>Answer the following questions:</h3>
+        <form method="POST" action="{{ url_for('predict') }}">
+            <div class="question">
+                <label>1.Do you worry a lot or are in constant fear?</label><br>
+                <input type="radio" name="question1" value="Yes"> Yes
+                <input type="radio" name="question1" value="No"> No
+            </div>
+            <div class="question">
+                <label>2.Do you feel restless and irritable frequently?</label><br>
+                <input type="radio" name="question1" value="Yes"> Yes
+                <input type="radio" name="question1" value="No"> No
+            </div>
+            <div class="question">
+                <label>3.Do you have difficulty in concentrating or making decisions?</label><br>
+                <input type="radio" name="question1" value="Yes"> Yes
+                <input type="radio" name="question1" value="No"> No
+            </div>
+            <div class="question">
+                <label>4.Do you have muscle tension?</label><br>
+                <input type="radio" name="question1" value="Yes"> Yes
+                <input type="radio" name="question1" value="No"> No
+            </div>
+            <div class="question">
+                <label>5.Do you have frequent panic attacks?</label><br>
+                <input type="radio" name="question1" value="Yes"> Yes
+                <input type="radio" name="question1" value="No"> No
+            </div>
+            <div class="question">
+                <label>6.Is your sleep disturbed regularly?</label><br>
+                <input type="radio" name="question1" value="Yes"> Yes
+                <input type="radio" name="question1" value="No"> No
+            </div>
+            <div class="question">
+                <label>7.Do you get heart palpitations, or do you sweat or tremble frequently?</label><br>
+                <input type="radio" name="question1" value="Yes"> Yes
+                <input type="radio" name="question1" value="No"> No
+            </div>
+            <div class="question">
+                <label>8.Do you feel constant physical pain and ache?</label><br>
+                <input type="radio" name="question1" value="Yes"> Yes
+                <input type="radio" name="question1" value="No"> No
+            </div>
+            <div class="question">
+                <label>9.Do you persistently feel low or sad or hopelessness?</label><br>
+                <input type="radio" name="question1" value="Yes"> Yes
+                <input type="radio" name="question1" value="No"> No
+            </div>
+            <div class="question">
+                <label>10.Do you have fatigue, low energy and low motivation all the time?</label><br>
+                <input type="radio" name="question1" value="Yes"> Yes
+                <input type="radio" name="question1" value="No"> No
+            </div>
+            <!-- Repeat for other questions -->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
