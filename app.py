@@ -71,7 +71,24 @@ def predict():
             request.form['question7'],
             request.form['question8'],
             request.form['question9'],
-            request.form['question10']
+            request.form['question10'],
+            request.form['question11'],
+            request.form['question12'],
+            request.form['question13'],
+            request.form['question14'],
+            request.form['question15'],
+            request.form['question16'],
+            request.form['question17'],
+            request.form['question18'],
+            request.form['question19'],
+            request.form['question20'],
+            request.form['question21'],
+            request.form['question22'],
+            request.form['question23'],
+            request.form['question24'],
+            request.form['question25'],
+            request.form['question26'],
+            request.form['question27']
         ]
         
         # Convert answers to numerical values (e.g., Yes = 1, No = 0)
