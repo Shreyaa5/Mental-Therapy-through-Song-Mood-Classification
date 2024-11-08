@@ -10,7 +10,7 @@ app.secret_key = 'your_secret_key'
 # Database setup
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'password'  # Use your MySQL password
+app.config['MYSQL_PASSWORD'] = '721157'  # Use your MySQL password
 app.config['MYSQL_DB'] = 'flask_ml_db'
 mysql = MySQL(app)
 
