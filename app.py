@@ -25,7 +25,7 @@ def home():
         return render_template('home.html')
     else:
         return redirect(url_for('login'))
-
+#Helloo
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
