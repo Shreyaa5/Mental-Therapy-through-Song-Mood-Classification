@@ -8,10 +8,11 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 # Database setup
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '721157'  # Use your MySQL password
+app.config['MYSQL_HOST'] = '3.110.102.61' #Changed the Host User Password to the actual server one
+app.config['MYSQL_USER'] = 'debanjan'
+app.config['MYSQL_PASSWORD'] = 'debanjan'  # Use your MySQL password
 app.config['MYSQL_DB'] = 'flask_ml_db'
+app.confg['MYSQL_PORT'] = '3306'
 mysql = MySQL(app)
 
 # Load ML model
@@ -25,7 +26,7 @@ def home():
     else:
         return redirect(url_for('login'))
 
-# Registration Page
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':

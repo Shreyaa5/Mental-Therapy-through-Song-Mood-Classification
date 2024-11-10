@@ -11,13 +11,25 @@ body {
 
 .home-page{
     font-family:  Arial, sans-serif;
-    text-align: top;
-    align-items: top;
+    margin-left: 650px;
+    margin-right: 50px;
+    h1{
+        text-align: center;
+        margin-top: -250px;
+    
+    }
+    h2,h3,p{
+        text-align: center;
+        margin-top: 20px;
+    
+    }
+    
+    
     h1,h2,h3{
-        color:#ccc;
+        color:#000000;
     }
     p{
-        color: aliceblue;
+        color: rgb(0, 3, 6);
     }
 
 

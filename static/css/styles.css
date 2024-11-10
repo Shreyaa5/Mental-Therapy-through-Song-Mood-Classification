@@ -3,16 +3,11 @@ body {
     display:flex;
     justify-content: center;
     align-items: center;
-    body {
-    font-family: Arial, sans-serif;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    margin: 0;
+    height: auto;
+    /* margin: 100; */
     background-image: url("/static/images/bg.png");
     background-size:cover;
-    background-position: center;
+    background-position:center;
 }
 
 .container {
@@ -27,7 +22,7 @@ body {
 }
 
 
- h3 {
+h3 {
     color:darkslategrey;
     text-align: left;
 }
@@ -62,12 +57,12 @@ button {
     width: 100%;
 }
 
-    margin: 0;
+    /* margin: 0;
     background-image: url("/static/images/bg.png");
     background-size: cover;
-    background-position: center;
-}
+    background-position: center; */
 
+    
 .container {
     background-color: rgba(255, 255, 255, 0.6); 
     padding: 20px;
@@ -78,12 +73,11 @@ button {
     position: relative;
     top:10px;
     left:-450px;
-    
     align-self:flex-start;
 }
 
 
- h3 {
+h3 {
     color:darkslategrey;
     text-align: left;
 }
@@ -111,7 +105,7 @@ input[type="radio"] {
 button {
     padding: 10px 20px;
     color:black;
-    background-color:aquamarine;
+    background-color:lightgreen;
     border: none;
     border-radius: 5px;
     cursor: pointer;
