@@ -12,7 +12,7 @@ app.config['MYSQL_HOST'] = '3.110.102.61' #Changed the Host User Password to the
 app.config['MYSQL_USER'] = 'debanjan'
 app.config['MYSQL_PASSWORD'] = 'debanjan'  # Use your MySQL password
 app.config['MYSQL_DB'] = 'flask_ml_db'
-app.confg['MYSQL_PORT'] = '3306'
+app.config['MYSQL_PORT'] = '3306'
 mysql = MySQL(app)
 
 # Load ML model
