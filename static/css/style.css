@@ -9,30 +9,25 @@ body {
     margin: 0;
 }
 
-.home-page{
-    font-family:  Arial, sans-serif;
+.home-page {
+    font-family: Arial, sans-serif;
     margin-left: 650px;
     margin-right: 50px;
-    h1{
-        text-align: center;
-        margin-top: -250px;
-    
-    }
-    h2,h3,p{
-        text-align: center;
-        margin-top: 20px;
-    
-    }
-    
-    
-    h1,h2,h3{
-        color:#000000;
-    }
-    p{
-        color: rgb(0, 3, 6);
-    }
+}
 
+.home-page h1 {
+    text-align:center;
+    margin-top: auto;
+    width: 500px;
+    color: #000000;
+    align-items:center;
+}
 
+.home-page h2, .home-page h3, .home-page p {
+    text-align: center;
+    color: rgb(0, 3, 6);
+    margin-top: 10px;
+    width: 800px;
 }
 
 .container {
@@ -41,25 +36,27 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 350px;
-    text-align: left; 
-    margin-left: 20px; 
-    align-self: flex-start; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+}
 
-h2{
+.container h2 {
     color: #333;
     margin-bottom: 10px;
     text-align: left;
 }
 
-
-h3 {
+.container h3 {
     color: darkslategrey;
     margin-bottom: 15px;
 }
 
 form {
     display: grid;
-    gap: 10px; 
+    gap: 10px;
+    width: 100%;
 }
 
 input[type="text"], input[type="password"] {
@@ -81,23 +78,29 @@ label {
 }
 
 input[type="radio"] {
-    margin: 0 5px 0 0; 
+    margin: 0 5px 0 0;
 }
 
-button {
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 600px;
+}
+
+.button-group button {
     padding: 10px 20px;
     color: #fff;
-    background-color: #007bff;
+    background-color: cadetblue;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
+    font-size: 16px;
 }
 
-p {
-    margin-top: 15px;
-    text-align: center;
+.button-group button:hover {
+    background-color: #5a9ea6; /* Slightly darker shade on hover */
 }
+
 
 
