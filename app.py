@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_mysqldb import MySQL
 import pickle
 import numpy as np
+from joblib import load 
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -16,7 +17,7 @@ app.config['MYSQL_PORT'] = '3306'
 mysql = MySQL(app)
 
 # Load ML model
-model = pickle.load(open('model/model.pkl', 'rb'))
+model = load('model.sav')
 
 # Home Page
 @app.route('/')
