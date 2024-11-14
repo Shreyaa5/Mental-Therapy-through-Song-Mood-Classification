@@ -1,21 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from flask_mysqldb import MySQL
-import pickle
 import numpy as np
-from joblib import load 
+from joblib import load
+import mysql.connector
 
 # Initialize Flask app
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = 'secret_key'
 
 # Database setup
-app.config['MYSQL_HOST'] = '3.110.102.61' #Changed the Host User Password to the actual server one
-app.config['MYSQL_USER'] = 'debanjan'
-app.config['MYSQL_PASSWORD'] = 'debanjan'  # Use your MySQL password
-app.config['MYSQL_DB'] = 'flask_ml_db'
-app.config['MYSQL_PORT'] = '3306'
-mysql = MySQL(app)
-
+sql_connection = mysql.connector.connect(
+        host = "115.187.17.57",
+        user = "debanjan",
+        password = "debanjan",
+        database = "flask_ml_db",
+        port = "3316"
+    )
 # Load ML model
 model = load('model.sav')
 
@@ -26,18 +25,21 @@ def home():
         return render_template('home.html')
     else:
         return redirect(url_for('login'))
-#Hiiii
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        cur = mysql.connection.cursor()
-        cur.execute('INSERT INTO users (username, password) VALUES (%s, %s)', (username, password))
-        mysql.connection.commit()
-        flash('You have successfully registered', 'success')
-        return redirect(url_for('login'))
+        if(sql_connection):
+            
+            cur = sql_connection.cursor()
+            cur.execute('INSERT INTO users (username, password) VALUES (%s, %s)', (username, password))
+            sql_connection.commit()
+            flash('You have successfully registered', 'success')
+            return redirect(url_for('login'))
+        else:
+            print("connect is null")
     return render_template('register.html')
 
 # Login Page
@@ -46,16 +48,19 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        cur = mysql.connection.cursor()
-        cur.execute('SELECT * FROM users WHERE username = %s AND password = %s', (username, password))
-        user = cur.fetchone()
-        if user:
-            session['loggedin'] = True
-            session['username'] = username
-            session['user_id'] = user[0]
-            return redirect(url_for('home'))
+        if(sql_connection):
+            cur = sql_connection.cursor()
+            cur.execute('SELECT * FROM users WHERE username = %s AND password = %s', (username, password))
+            user = cur.fetchone()
+            if user:
+                session['loggedin'] = True
+                session['username'] = username
+                session['user_id'] = user[0]
+                return redirect(url_for('home'))
+            else:
+                flash('Invalid login credentials', 'danger')
         else:
-            flash('Invalid login credentials', 'danger')
+            print("Connect is null")
     return render_template('login.html')
 
 # Prediction API (to interact with the ML model)
