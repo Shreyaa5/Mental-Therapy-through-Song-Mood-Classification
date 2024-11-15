@@ -31,15 +31,19 @@
             margin: 15px 0;
             border-radius: 5px;
             border: 1px solid #ccc;
+            text-align: center;
         }
-        button {
-            padding: 10px 20px;
-            color: #fff;
-            background-color: #2e7d32;
+        form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
             border: none;
             border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            width: 100%;
+            margin-top: 20px; /* Space added here */
         }
         p {
             margin-top: 20px;
@@ -51,10 +55,19 @@
         <h2>Create an Account</h2>
         <form method="POST" action="{{ url_for('register') }}">
             <label for="username">Username:</label>
-            <input type="text" name="username" required><br>
+            <input type="text" name="username" required>
+            
             <label for="password">Password:</label>
-            <input type="password" name="password" required><br>
+            <input type="password" name="password" required>
+            
+            <label for="Full name">Full name:</label>
+            <input type="text" name="Full name" required>
+            
+            <label for="Mobile Number">Mobile Number:</label>
+            <input type="number" name="Mobile Number" required>
+            
             <button type="submit">Register</button>
+            
         </form>
         <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
     </div>
