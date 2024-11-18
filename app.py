@@ -31,10 +31,14 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        firstName = request.form['firstName']
+        lastName = request.form['lastName']
+        phoneNumber = request.form['phoneNumber']
+        emailId = request.form['emailId']
         if(sql_connection):
             
             cur = sql_connection.cursor()
-            cur.execute('INSERT INTO users (username, password) VALUES (%s, %s)', (username, password))
+            cur.execute('INSERT INTO users (username, password, firstName, lastName, phoneNumber, emailId) VALUES (%s, %s, %s, %s, %s, %s)', (username, password, firstName, lastName, phoneNumber, emailId))
             sql_connection.commit()
             flash('You have successfully registered', 'success')
             return redirect(url_for('login'))
@@ -58,7 +62,8 @@ def login():
                 session['user_id'] = user[0]
                 return redirect(url_for('home'))
             else:
-                flash('Invalid login credentials', 'danger')
+                #flash('Invalid login credentials', 'error')
+                print('Invalid login credentials')
         else:
             print("Connect is null")
     return render_template('login.html')
