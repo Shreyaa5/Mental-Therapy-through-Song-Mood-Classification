@@ -14,6 +14,14 @@
             height: 100vh;
             margin: 0;
         }
+        .flash-message {
+            color: red;
+            background-color: #e8f5e9;
+            padding: 10px;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
         .container {
             background-color: #fff;
             padding: 30px;
@@ -53,6 +61,13 @@
 <body>
     <div class="container">
         <h2>Create an Account</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <form method="POST" action="{{ url_for('register') }}">
             
             <label for="firstName">First Name:</label>

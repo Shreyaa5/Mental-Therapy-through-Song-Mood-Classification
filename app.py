@@ -36,6 +36,16 @@ def register():
         lastName = request.form['lastName']
         phoneNumber = request.form['phoneNumber']
         emailId = request.form['emailId']
+        password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$'
+        if not re.match(password_regex, password):
+            flash("Password must be atleast 8 characters long and at max be 30 characters,\nIncludes at least one uppercase letter, one lowercase letter, one number, and one special character.", "error")
+            return render_template('register.html')
+        if not re.match(r'^[6-9]\d{9}$', phoneNumber):
+            flash("Invalid phone number. Please enter a valid phone number.", "error")
+            return render_template('register.html')
+        if emailId.startswith('_'):
+            flash("Email cannot start with an underscore. Try Again.", "error")
+            return render_template('register.html')
         if(re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',emailId)):
             if(sql_connection):
                 
