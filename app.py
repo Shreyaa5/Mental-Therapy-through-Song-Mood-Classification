@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 import numpy as np
 from joblib import load
 import mysql.connector
+import re
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -35,16 +36,25 @@ def register():
         lastName = request.form['lastName']
         phoneNumber = request.form['phoneNumber']
         emailId = request.form['emailId']
-        if(sql_connection):
-            
-            cur = sql_connection.cursor()
-            cur.execute('INSERT INTO users (username, password, firstName, lastName, phoneNumber, emailId) VALUES (%s, %s, %s, %s, %s, %s)', (username, password, firstName, lastName, phoneNumber, emailId))
-            sql_connection.commit()
-            flash('You have successfully registered', 'success')
-            return redirect(url_for('login'))
+        if(re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',emailId)):
+            if(sql_connection):
+                
+                cur = sql_connection.cursor()
+                cur.execute('INSERT INTO users (username, password, firstName, lastName, phoneNumber, emailId) VALUES (%s, %s, %s, %s, %s, %s)', (username, password, firstName, lastName, phoneNumber, emailId))
+                sql_connection.commit()
+                flash('You have successfully registered', 'success')
+                return redirect(url_for('login'))
+            else:
+                print("connect is null")
         else:
-            print("connect is null")
+            flash("Invalid Email. Try Again","error")
     return render_template('register.html')
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user',None)
+    flash("You have been logged out","message")
+    return redirect(url_for('login'))
 
 # Login Page
 @app.route('/login', methods=['GET', 'POST'])
@@ -62,8 +72,7 @@ def login():
                 session['user_id'] = user[0]
                 return redirect(url_for('home'))
             else:
-                #flash('Invalid login credentials', 'error')
-                print('Invalid login credentials')
+                flash("Invalid login credentials", "error")
         else:
             print("Connect is null")
     return render_template('login.html')
