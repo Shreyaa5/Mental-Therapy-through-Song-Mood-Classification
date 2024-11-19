@@ -14,14 +14,50 @@
             height: 100vh;
             margin: 0;
         }
-        .flash-message {
+        /* .flash-message {
             color: red;
             background-color: #e8f5e9;
             padding: 10px;
             border: 1px solid #f5c6cb;
             border-radius: 5px;
             margin-bottom: 10px;
+        } */
+
+        .flash-message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
         }
+
+        .flash-message.error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+
+        .flash-message.success {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        .flash-message.info {
+            color: #0c5460;
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+        }
+
+        .flash-message.logout {
+            color: #004085;
+            background-color: #cce5ff;
+            border: 1px solid #b8daff;
+        }
+
+
+        
         .container {
             background-color: #fff;
             padding: 30px;
@@ -59,21 +95,25 @@
 <body>
     <div class="container">
         <h2>Login</h2>
+        <!-- Display flash messages with category-based classes -->
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="flash-message">{{ message }}</div>
+                    <div class="flash-message {{ category }}">{{ message }}</div>
                 {% endfor %}
             {% endif %}
         {% endwith %}
+
+        <!-- Login form -->
         <form method="POST" action="{{ url_for('login') }}">
             <label for="username">Username:</label>
-            <input type="text" name="username" required><br>
+            <input type="text" id="username" name="username" required><br>
             <label for="password">Password:</label>
-            <input type="password" name="password" required><br>
+            <input type="password" id="password" name="password" required><br>
             <button type="submit">Login</button>
         </form>
         <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
     </div>
 </body>
+
 </html>

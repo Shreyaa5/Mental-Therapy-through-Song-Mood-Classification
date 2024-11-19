@@ -60,10 +60,11 @@ def register():
             flash("Invalid Email. Try Again","error")
     return render_template('register.html')
 
+#Logout Page
 @app.route('/logout', methods=['POST'])
 def logout():
     session.pop('user',None)
-    flash("You have been logged out","message")
+    flash("Logged out successfully!", "logout")
     return redirect(url_for('login'))
 
 # Login Page
