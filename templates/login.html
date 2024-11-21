@@ -6,7 +6,7 @@
     <title>Login</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #e8f5e9;
             display: flex;
             justify-content: center;
@@ -14,14 +14,6 @@
             height: 100vh;
             margin: 0;
         }
-        /* .flash-message {
-            color: red;
-            background-color: #e8f5e9;
-            padding: 10px;
-            border: 1px solid #f5c6cb;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        } */
 
         .flash-message {
             padding: 10px;
@@ -51,44 +43,95 @@
         }
 
         .flash-message.logout {
-            color:#007bff;
+            color: #004085;
             background-color: #cce5ff;
             border: 1px solid #b8daff;
         }
 
-
-        
         .container {
-            background-color: #fff;
+            background-color: #ffffff;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 320px;
+            width: 90%;
+            max-width: 400px;
             text-align: center;
+        }
 
-        }
         h2 {
-            color:darkcyan;
+            color: darkcyan;
+            margin-bottom: 20px;
         }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
         input[type="text"], input[type="password"] {
             width: 100%;
-            padding: 10px ;
-            margin: 15px 0;
+            padding: 10px;
+            margin-bottom: 15px;
             border-radius: 5px;
             border: 1px solid #a7ade8;
-            text-align: center;
+            box-sizing: border-box;
         }
+
         button {
-            padding: 10px 20px;
-            color: #fff;
+            padding: 12px 20px;
+            color: #ffffff;
             background-color: #007bff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
         p {
             margin-top: 15px;
+            font-size: 14px;
+        }
+
+        p a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            input[type="text"], input[type="password"] {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            p {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -107,13 +150,12 @@
         <!-- Login form -->
         <form method="POST" action="{{ url_for('login') }}">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
             <button type="submit">Login</button>
         </form>
         <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
     </div>
 </body>
-
 </html>
