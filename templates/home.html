@@ -3,32 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home </title>
+    <title>Home</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+
+        .bold-text {
+         font-weight: bold;
+         font-size: 18px;
+         font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .welcome-text {
+            position: relative;
+            left: 170px; /* Adjust this value as needed */
+            text-align: left;
+        }
+
+
+
+        .home-page {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align:left;
+            /* background-color: #ffffff; */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            left: 300px;
+            margin-top: 120px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            color: #16a085;
+            margin-top: 30px;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color:#16a085;
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .logout-button button {
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            background-color:darkturquoise; /*  color for logout */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button button:hover {
+            background-color:aqua; /*  for hover */
+        }
+
+        .diagnosis-section {
+            margin: 30px 0;
+        }
+
+        .diagnosis-section button {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color:darkcyan; /* Blue color for start diagnosis */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .diagnosis-section button:hover {
+            background-color: hsl(211, 100%, 35%); /* Darker blue for hover */
+        }
+
+        @media (max-width: 600px) {
+            .home-page {
+                padding: 15px;
+            }
+
+            h2, h3 , h4 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="home-page">
-
-        <h1>Welcome to [Platform Name]</h1>
-        <p>Your companion in mental wellness. Here, we believe in the healing power of self-awareness and the transformative energy of music. Our unique platform guides you through a personalized journey, helping you explore your mental health with insight, care, and compassion.</p>
-
-        <h3>How It Works:</h3>
-        <p>Through a series of thoughtfully designed questions, we’ll help you identify areas of stress, anxiety, or imbalance. Our approach is simple and supportive, focused on helping you understand yourself better without judgment.</p>
-
-        <h3>Personalized Music for Mind & Soul</h3>
-        <p>Once we've helped you uncover patterns in your mental health, we’ll curate a playlist tailored just for you. Each piece is selected to comfort, inspire, and uplift—based on research and insights from the world of music therapy.</p>
-
-        <h2>Explore. Heal. Grow.</h2>
-        <p>Let music be your guide.</p>
-    </div>
-
-    <div class="button-group">
-        <!-- <button>Log In</button>
-        <button>Register</button> -->
+    <!-- Logout button in the upper right corner -->
+    <div class="logout-button">
         <form action="/logout" method="post">
             <button type="submit">Log out</button>
         </form>
-        
-        
+    </div>
+
+    <div class="home-page">
+        <h1 class="welcome-text">Welcome to [Platform Name]</h1>
+        <p>
+            Your companion in mental wellness. Here, we believe in the healing power of self-awareness 
+            and the transformative energy of music. Our unique platform guides you through a personalized 
+            journey, helping you explore your mental health with insight, care, and compassion.
+        </p>
+
+        <h3>How It Works:</h3>
+        <p>
+            Through a series of thoughtfully designed questions, we’ll help you identify areas of stress, 
+            anxiety, or imbalance. Our approach is simple and supportive, focused on helping you understand 
+            yourself better without judgment.
+        </p>
+
+        <h3>Personalized Music for Mind & Soul</h3>
+        <p>
+            Once we've helped you uncover patterns in your mental health, we’ll curate a playlist tailored 
+            just for you. Each piece is selected to comfort, inspire, and uplift—based on research and insights 
+            from the world of music therapy.
+        </p>
+
+        <h3>Explore. Heal. Grow.</h2>
+
+        <div class="diagnosis-section">
+            <p class="bold-text">We are providing multiple diagnoses for mental health disorders. If you want, press the button and start diagnosis</p>
+            <form action="/start_diagnosis" method="get">
+                <button type="submit">Start Diagnosis</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
