@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Questionnaire</title>
+    <title>Questionnaire1</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Welcome, ['username']</h1>
-        <h3>Answer the following questions:</h3>
-        <form method="POST" action="{{ url_for('predict') }}">
+        <h2>Answer the following questions:</h2>
+        <form method="POST" action="{{ url_for('questionnaire2') }}">
             <div class="question">
                 <label>1.Do you worry a lot or are in constant fear?</label><br>
-                <input type="radio" name="question1" value="Yes"> Yes
-                <input type="radio" name="question1" value="No"> No
+                <input type="radio" name="question1" id="question1" value="Yes"> Yes
+                <input type="radio" name="question1" id="question1" value="No"> No
             </div>
             <div class="question">
                 <label>2.Do you feel restless and irritable frequently?</label><br>
@@ -78,8 +78,13 @@
                 <input type="radio" name="question13" value="No"> No
             </div>
 
-            <button type="next">Next</button>
-        </form>
+            <!-- <form action="/questionnaire2" method="post"> -->
+            <button type="submit">Next</button>
+            <!-- </form> -->
+        
+
+    </form>
+        
     </div>
 </body>
 </html>

@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Questionnaire</title>
+    <title>Questionnaire2</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Welcome, ['username']</h1>
-        <h3>Answer the following questions:</h3>
-        <form method="POST" action="{{ url_for('predict') }}">
+        <h2>Answer the following questions:</h2>
+        <form method="post" action="{{ url_for('predict') }}">
             <div class="question">
                 <label>14.Do you have excessively increased energy or activity level?</label><br>
                 <input type="radio" name="question14" value="Yes"> Yes
@@ -80,7 +80,11 @@
                 <input type="radio" name="question27" value="Yes"> Yes
                 <input type="radio" name="question27" value="No"> No
             </div>
+        
+            
             <button type="submit">Submit</button>
+        
+
         </form>
     </div>
 </body>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis Result</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url("/static/images/bg3.webp"); 
+            background-size: cover;
+            background-position:center;
+            
+            /* background-color: #f4f8fb; */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 2.4em;
+            color: #00499c;
+            margin-bottom: 20px;
+            margin-top: 5px;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        strong {
+            color:coral;
+            font-size: 1.5em;
+        }
+        a {
+            text-decoration:none;
+            background-color: #4a90e2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color:#00499c;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background:rgb(255, 255, 255);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diagnosis Result</h1>
+        <p>Your predicted mental health status: <strong>{{ prediction }}</strong></p>
+        <p>Recommended Solution:</p>
+        <p><strong>{{ solution }}</strong></p>
+        <a href="{{ url_for('home') }}">Back to Home</a>
+    </div>
+</body>
+</html>

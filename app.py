@@ -27,6 +27,7 @@ def home():
     else:
         return redirect(url_for('login'))
 
+#Register
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -88,13 +89,20 @@ def login():
             print("Connect is null")
     return render_template('login.html')
 
-# Prediction API (to interact with the ML model)
-@app.route('/predict', methods=['POST'])
-def predict():
-    if request.method == 'POST':
-        # Get user form input (Yes/No answers)
-        answers = [
-            request.form['question1'],
+#Questionnaire1
+@app.route('/startDiagnosis', methods=['POST'])
+def startDiagnosis():
+    if 'loggedin' in session:
+        return(render_template('Questionnaire1.html'))
+    else:
+        flash("Please login before diagnosis.","message")
+        return(render_template('home.html'))
+    
+
+#Questionnaire2  
+@app.route('/questionnaire2', methods=['POST'])
+def questionnaire2():
+    answer1=[request.form['question1'],
             request.form['question2'],
             request.form['question3'],
             request.form['question4'],
@@ -106,7 +114,23 @@ def predict():
             request.form['question10'],
             request.form['question11'],
             request.form['question12'],
-            request.form['question13'],
+            request.form['question13']]
+    session['answer']= answer1
+    return(render_template('Questionnaire2.html'))
+
+    
+    
+# Result Route (Display prediction)
+@app.route('/result')
+def result():
+    return render_template('result.html')
+
+# Prediction API (to interact with the ML model)
+@app.route('/predict', methods=['POST'])
+def predict():
+    if request.method == 'POST':
+        # Get user form input (Yes/No answers)
+        answers2 = [
             request.form['question14'],
             request.form['question15'],
             request.form['question16'],
@@ -122,6 +146,13 @@ def predict():
             request.form['question26'],
             request.form['question27']
         ]
+        answers=[]
+        answers.extend(session['answer']) 
+        answers.extend(answers2)
+
+
+    # Continue with processing...
+
         
         # Convert answers to numerical values (e.g., Yes = 1, No = 0)
         answers = [1 if answer == 'Yes' else 0 for answer in answers]
