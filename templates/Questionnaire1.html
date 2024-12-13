@@ -5,7 +5,7 @@
     <title>Questionnaire1</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
-<body>
+<!-- <body>
     <div class="container">
         <h1>Welcome, ['username']</h1>
         <h2>Answer the following questions:</h2>
@@ -60,8 +60,6 @@
                 <input type="radio" name="question10" value="Yes"> Yes
                 <input type="radio" name="question10" value="No"> No
             </div>
-            <!-- Added all the questions from questionaire and chaned the name attr for all the questions to unique ones-->
-            <!-- Why are all questions separately contained in div? -->
             <div class="question">
                 <label>11.Has their been a significant change in your appetite recently?</label><br>
                 <input type="radio" name="question11" value="Yes"> Yes
@@ -77,14 +75,56 @@
                 <input type="radio" name="question13" value="Yes"> Yes
                 <input type="radio" name="question13" value="No"> No
             </div>
-
-            <!-- <form action="/questionnaire2" method="post"> -->
             <button type="submit">Next</button>
-            <!-- </form> -->
-        
-
+            
     </form>
-        
+    </div>
+</body> -->
+
+
+<body>
+    <div class="container">
+        <h1>Welcome, ['username']</h1>
+        <h2>Answer the following questions:</h2>
+        <form method="POST" action="{{ url_for('questionnaire2') }}">
+            <div class="question">
+                <label>1.Do you frequently experience excessive worry, fear, or restlessness, often accompanied by physical symptoms like heart palpitations, sweating, or trembling?</label><br>
+                <input type="radio" name="question1" id="question1" value="Yes"> Yes
+                <input type="radio" name="question1" id="question1" value="No"> No
+            </div>
+            <div class="question">
+                <label>2.Do you frequently feel persistently sad, hopeless, or fatigued, along with changes in sleep, appetite, or weight?</label><br>
+                <input type="radio" name="question2" value="Yes"> Yes
+                <input type="radio" name="question2" value="No"> No
+            </div>
+            <div class="question">
+                <label>3.Have you ever experienced periods of excessive energy, reduced need for sleep, or impulsive and reckless behavior?</label><br>
+                <input type="radio" name="question3" value="Yes"> Yes
+                <input type="radio" name="question3" value="No"> No
+            </div>
+            <div class="question">
+                <label>4.Do you experience intrusive thoughts or feel compelled to repeat actions like checking, cleaning, or counting, even when unnecessary?</label><br>
+                <input type="radio" name="question4" value="Yes"> Yes
+                <input type="radio" name="question4" value="No"> No
+            </div>
+            <div class="question">
+                <label>5.Have you had flashbacks, intrusive memories, or found yourself avoiding reminders of traumatic events?</label><br>
+                <input type="radio" name="question5" value="Yes"> Yes
+                <input type="radio" name="question5" value="No"> No
+            </div>
+            <div class="question">
+                <label>6.Do you feel emotionally detached, numb, or hyper-alert to your surroundings, even in safe situations?</label><br>
+                <input type="radio" name="question6" value="Yes"> Yes
+                <input type="radio" name="question6" value="No"> No
+            </div>
+            <div class="question">
+                <label>7.Have you experienced hallucinations, delusions, or a sense of disconnection from reality?</label><br>
+                <input type="radio" name="question7" value="Yes"> Yes
+                <input type="radio" name="question7" value="No"> No
+            </div>
+            <button type="submit">Next</button>
+            
+    </form>
     </div>
 </body>
 </html>

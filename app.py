@@ -98,6 +98,26 @@ def startDiagnosis():
         flash("Please login before diagnosis.","message")
         return(render_template('home.html'))
     
+#################################################################
+# #Questionnaire2  
+# @app.route('/questionnaire2', methods=['POST'])
+# def questionnaire2():
+#     answer1=[request.form['question1'],
+#             request.form['question2'],
+#             request.form['question3'],
+#             request.form['question4'],
+#             request.form['question5'],
+#             request.form['question6'],
+#             request.form['question7'],
+#             request.form['question8'],
+#             request.form['question9'],
+#             request.form['question10'],
+#             request.form['question11'],
+#             request.form['question12'],
+#             request.form['question13']]
+#     session['answer']= answer1
+#     return(render_template('Questionnaire2.html'))
+############################################################
 
 #Questionnaire2  
 @app.route('/questionnaire2', methods=['POST'])
@@ -108,13 +128,7 @@ def questionnaire2():
             request.form['question4'],
             request.form['question5'],
             request.form['question6'],
-            request.form['question7'],
-            request.form['question8'],
-            request.form['question9'],
-            request.form['question10'],
-            request.form['question11'],
-            request.form['question12'],
-            request.form['question13']]
+            request.form['question7']]
     session['answer']= answer1
     return(render_template('Questionnaire2.html'))
 
@@ -125,46 +139,81 @@ def questionnaire2():
 def result():
     return render_template('result.html')
 
+# # Prediction API (to interact with the ML model)
+# @app.route('/predict', methods=['POST'])
+# def predict():
+#     if request.method == 'POST':
+#         # Get user form input (Yes/No answers)
+#         answers2 = [
+#             request.form['question14'],
+#             request.form['question15'],
+#             request.form['question16'],
+#             request.form['question17'],
+#             request.form['question18'],
+#             request.form['question19'],
+#             request.form['question20'],
+#             request.form['question21'],
+#             request.form['question22'],
+#             request.form['question23'],
+#             request.form['question24'],
+#             request.form['question25'],
+#             request.form['question26'],
+#             request.form['question27']
+#         ]
+#         answers=[]
+#         answers.extend(session['answer']) 
+#         answers.extend(answers2)
+
+############################################################
 # Prediction API (to interact with the ML model)
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
         # Get user form input (Yes/No answers)
         answers2 = [
-            request.form['question14'],
-            request.form['question15'],
-            request.form['question16'],
-            request.form['question17'],
-            request.form['question18'],
-            request.form['question19'],
-            request.form['question20'],
-            request.form['question21'],
-            request.form['question22'],
-            request.form['question23'],
-            request.form['question24'],
-            request.form['question25'],
-            request.form['question26'],
-            request.form['question27']
-        ]
+            request.form['question8'],
+            request.form['question9'],
+            request.form['question10'],
+            request.form['question11'],
+            request.form['question12'],
+            request.form['question13'],
+            request.form['question14']]
+
         answers=[]
         answers.extend(session['answer']) 
         answers.extend(answers2)
 
-
-    # Continue with processing...
-
-        
         # Convert answers to numerical values (e.g., Yes = 1, No = 0)
         answers = [1 if answer == 'Yes' else 0 for answer in answers]
+
+        #####################################################################
+        # # Convert to numpy array and reshape for the model
+        # features = np.array(answers).reshape(1, -1)
         
-        # Convert to numpy array and reshape for the model
-        features = np.array(answers).reshape(1, -1)
+        # # Predict using the ML model
+        # prediction = model.predict(features)
         
-        # Predict using the ML model
-        prediction = model.predict(features)
-        
-        # Return the result to the user
-        return render_template('result.html', prediction=prediction[0])
+        # # Return the result to the user
+        # return render_template('result.html', prediction=prediction[0])
+        #####################################################################
+
+        # Logic to calculate disorder scores
+
+        disorder_scores = {
+            "Anxiety": answers[1] + answers[10] + answers[14],
+            "Depression": answers[2] + answers[9] + answers[13] ,
+            "Bipolar": answers[3] + answers[11],
+            "OCD": answers[4] + answers[12],
+            "PTSD": answers[5] + answers[6],
+            "Schizophrenia":  answers[7] + answers[13]
+        }
+
+        # Determine the most likely disorder
+        most_likely_disorder = max(disorder_scores, key=disorder_scores.get)
+
+        # Pass prediction to result page
+        return render_template('result.html', prediction=most_likely_disorder)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
