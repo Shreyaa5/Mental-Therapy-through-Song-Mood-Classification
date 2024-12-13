@@ -17,7 +17,7 @@ sql_connection = mysql.connector.connect(
         port = "3316"
     )
 # Load ML model
-model = load('model.sav')
+#model = load('model.sav')
 
 # Home Page
 @app.route('/')
@@ -200,12 +200,12 @@ def predict():
         # Logic to calculate disorder scores
 
         disorder_scores = {
-            "Anxiety": answers[1] + answers[10] + answers[14],
-            "Depression": answers[2] + answers[9] + answers[13] ,
-            "Bipolar": answers[3] + answers[11],
-            "OCD": answers[4] + answers[12],
-            "PTSD": answers[5] + answers[6],
-            "Schizophrenia":  answers[7] + answers[13]
+            "Anxiety Disorder": answers[0] + answers[9] + answers[13],
+            "Depression": answers[1] + answers[8] + answers[12] ,
+            "Bipolar Disorder": answers[2] + answers[10],
+            "Obsessive Compulsive Disorder": answers[3] + answers[11],
+            "Post-Traumatic Stress Disorder": answers[4] + answers[5],
+            "Schizophrenia":  answers[6] + answers[12]
         }
 
         # Determine the most likely disorder
