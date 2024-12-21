@@ -64,7 +64,17 @@
         <h1>Diagnosis Result</h1>
         <p>We are predicting that you may have: <strong>{{ prediction }}</strong></p>
         <p>Suggested actions:</p>
-        <p><strong>{{ actions }}</strong></p>
+        <p>{{ actions1 }}</p>
+        <p>{{ actions2 }}</p>
+        <p>{{ actions3 }}</p>
+        <p>{{ actions4 }}</p>
+        <p>We also suggest listening to songs with {{ raaga }} raagas at {{ timeOfDay }}</p>
+        <p>{{ description }}</p>
+        <p>Here are some suggested songs:</p>
+        <p><strong><a href="{{ link1 }}">{{ song1 }}</a></strong></p>
+        <p><strong><a href="{{ link2 }}">{{ song2 }}</a></strong></p>
+        <p><strong><a href="{{ link3 }}">{{ song3 }}</a></strong></p>
+
         <a href="{{ url_for('home') }}">Back to Home</a>
     </div>
 </body>

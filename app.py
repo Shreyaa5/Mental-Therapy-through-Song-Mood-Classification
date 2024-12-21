@@ -211,8 +211,123 @@ def predict():
         # Determine the most likely disorder
         most_likely_disorder = max(disorder_scores, key=disorder_scores.get)
 
+        if(most_likely_disorder == "Anxiety Disorder"):
+            raag = "Bilawal"
+            TOD = "morning, during sunrise"
+
+            song1 = "Mayur Pangkhi Louka Amar"
+            link1 = "https://open.spotify.com/track/1QUefoT4WXG8tNR92ilCgE"
+
+            song2 = "Manush Hoye"
+            link2 = "https://open.spotify.com/track/1t715y57YZCksMYtNdtbIJ"
+
+            song3 = "Bhatiganger Majhi Ami"
+            link3 = "https://open.spotify.com/track/1APcdHREzjUAaqnJnlAIMG"
+
+            desc = "Bilawal is a Shuddha raaga (all natural notes) that creates a cheerful, tranquil, and harmonious mood. Its simplicity makes it ideal for grounding the mind and alleviating anxious thoughts."
+
+            firstAction = "Exercise: Regular physical activity releases endorphins and reduces stress hormones like cortisol. Activities like brisk walking, jogging, yoga, or swimming are especially beneficial."
+            secondAction = "Deep Breathing Exercises: Practice diaphragmatic or box breathing to reduce anxiety symptoms immediately. For example, inhale for 4 seconds, hold for 4 seconds, exhale for 4 seconds, and repeat."
+            thirdAction = "Progressive Muscle Relaxation (PMR): Tensing and then relaxing muscle groups can help reduce physical tension caused by anxiety."
+            forthAction = "Watch Comedy: Laughter reduces stress hormones and boosts mood."
+        elif(most_likely_disorder == "Depression"):
+            raag = "Kafi"
+            TOD = "evening"
+
+            song1 = "Chikan Goalini"
+            link1 = "https://open.spotify.com/track/6PKlzTQ4eA2N3Hrm8wPWIy"
+
+            song2 = "Gyaner Gyanda"
+            link2 = "https://open.spotify.com/track/1gj3lFcZW8vZkg9gW5c8Pl"
+
+            song3 = "Vadu Amar Garobini"
+            link3 = "https://open.spotify.com/track/4SSfCXsyYHGunfSUryzE1U"
+
+            desc = "Raaga Kafi is soft and soothing, it creates a relaxed and pleasant atmosphere. It helps ease emotional pain, creating a sense of comfort and calm."
+
+            firstAction = "Daily Exercise: Even light physical activity like walking, stretching, or yoga can release endorphins and improve mood. Aim for 20-30 minutes most days."
+            secondAction = "Spending Time Outdoors: Activities like gardening or hiking expose you to sunlight, increasing Vitamin D and improving mood."
+            thirdAction = "Gratitude Journaling: List 3 things you are grateful for each day to shift focus toward the positive aspects of life."
+            forthAction = "Create a Sleep Routine: Go to bed and wake up at the same time daily, aiming for 7-9 hours of quality sleep."
+        elif(most_likely_disorder == "Bipolar Disorder"):
+            raag = "Poorvi"
+            TOD = "twilight, i.e around dusk"
+
+            song1 = "O Sundar"
+            link1 = "https://open.spotify.com/track/3VdsY4zZweY9ijNOPIab09"
+
+            song2 = "Khat Palanke"
+            link2 = "https://open.spotify.com/track/6SB6rcD1j0F5mDdII2u2Y2"
+
+            song3 = "Emon Manob Somaj"
+            link3 = "https://open.spotify.com/track/1XDM4SFKl1dgK3vy6u2sb5"
+
+            desc = "Poorvi is a Sandhi Prakash Raaga (suitable for twilight) and has a mystical quality that induces balance and emotional tranquility. It uses a mix of komal (flat) and shuddha (natural) notes, creating a meditative and grounding effect."
+
+            firstAction = "Daily Schedule: Maintain a consistent routine for sleeping, eating, and activities to reduce mood swings triggered by irregularities."
+            secondAction = "Positive Affirmations: Practice self-compassion with affirmations like, “I am in control of my thoughts,” or “This phase will pass.”"
+            thirdAction = "Grounding with Nature: Touching the earth (e.g., gardening, sitting on grass) can help stabilize energy and connect to the present moment."
+            forthAction = "Writing: Journaling thoughts and feelings fosters self-awareness and provides emotional release."
+        elif(most_likely_disorder == "Obsessive Compulsive Disorder"):
+            raag = "Kafi"
+            TOD = "evening"
+
+            song1 = "Boli O Khokar Ma"
+            link1 = "https://open.spotify.com/track/13tdWCj9rxHx7UqiNXL7Mt"
+
+            song2 = "Hari Din To Gelo"
+            link2 = "https://open.spotify.com/track/1ijtcd8LuYfI3fVLvtqNcT"
+
+            song3 = "Bhatiyal Ganger Naiya"
+            link3 = "https://open.spotify.com/track/5MPm6CXwqH9x3eBS0xPJkr"
+
+            desc = "Kafi is mellow and thus promotes relaxation and reduces tension. It eases anxiety and encourages mindfulness, reducing the compulsion to perform repetitive behaviors."
+
+            firstAction = "Puzzles or Board Games: Activities that engage problem-solving can distract the mind from intrusive thoughts."
+            secondAction = "Hobbies: Engage in hobbies you enjoy, such as knitting, photography, or woodworking, to occupy your hands and mind."
+            thirdAction = "Limit Overchecking: Create boundaries for actions like re-reading, re-checking, or seeking excessive reassurance."
+            forthAction = "Digital Detox: Avoid spending too much time online researching fears or compulsions, as this can fuel anxiety."
+        elif(most_likely_disorder == "Post-Traumatic Stress Disorder"):
+            raag = "Todi"
+            TOD = "morning, just after sunrise"
+
+            song1 = "Hatey Hari Ebar Ami"
+            link1 = "https://open.spotify.com/track/3DMR2iKoWQ0SkIxlJ3Yfr8"
+
+            song2 = "Bhangor Bhola Shib Tomar"
+            link2 = "https://open.spotify.com/track/3msn6YUhZTpiLDiY0CCw5w"
+
+            song3 = "Ghum Venge Besh Moja Hoeche"
+            link3 = "https://open.spotify.com/track/4jwBPXsdUK9bI3aS6WodWA"
+
+            desc = "Todi is a profound and introspective raaga that uses komal (flat) notes and a slow progression, creating a melancholic yet healing atmosphere. It encourages emotional release and processing of suppressed trauma as well as provides a grounding effect, counteracting feelings of fear and hypervigilance."
+
+            firstAction = "5-4-3-2-1 Method: Identify five things you can see, four you can touch, three you can hear, two you can smell, and one you can taste to stay grounded in the present."
+            secondAction = "Deep Breathing: Practice slow, deep breaths to reduce anxiety. For example, inhale for 4 counts, hold for 4, exhale for 4, and hold for 4 (box breathing)."
+            thirdAction = "Morning Rituals: Start the day with a calming activity, such as journaling or stretching, to set a positive tone."
+            forthAction = "Nighttime Wind-Down: Create a bedtime routine involving calming activities, such as reading or drinking herbal tea, to improve sleep quality."
+        elif(most_likely_disorder == "Schizophrenia"):
+            raag = "Kalyan"
+            TOD = "evening, just after sunset"
+
+            song1 = "Bare Bare Aar Asa Hobena"
+            link1 = "https://open.spotify.com/track/1ZRHOQ2Ciikozn4jrruJmp"
+
+            song2 = "Lal Ke Keno Bhoy"
+            link2 = "https://open.spotify.com/track/607li9G8YMzWrdydgI9OcB"
+
+            song3 = "Loke Bole Lalon Fakir"
+            link3 = "https://open.spotify.com/track/06sQAV5rnZMqWU3tEdRRoZ"
+
+            desc = "Raaga Kalyan is known for its majestic and calming essence. It combines natural and harmonic notes that create a soothing and contemplative atmosphere. The calming melodies can ease episodes of restlessness or anxiety, and encourages focus and reduces intrusive or fragmented thoughts. However we also suggest that along with listening to these songs you seek professional help and therapy support."
+
+            firstAction = "Family and Friends: Maintain close relationships with trusted individuals who provide emotional support."
+            secondAction = "Reading or Audiobooks: Explore uplifting or educational material to stay mentally active."
+            thirdAction = "Establishing Hygiene Routines: Create a checklist for daily self-care tasks like bathing, grooming, and dressing."
+            forthAction = "Cognitive Behavioral Therapy (CBT): Work with a therapist to address delusional thinking or distressing emotions."
+
         # Pass prediction to result page
-        return render_template('result.html', prediction=most_likely_disorder)
+        return render_template('result.html', prediction=most_likely_disorder,link1=link1,link2=link1,link3=link1,description=desc,actions1=firstAction,actions2=secondAction,actions3=thirdAction,actions4=forthAction,song1=song1,song2=song2,song3=song3, raaga=raag,timeOfDay=TOD)
 
 
 if __name__ == '__main__':
