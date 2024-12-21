@@ -93,7 +93,7 @@ def login():
 @app.route('/startDiagnosis', methods=['POST'])
 def startDiagnosis():
     if 'loggedin' in session:
-        return(render_template('Questionnaire1.html'))
+        return(render_template('Questionnaire1.html',user=session['username']))
     else:
         flash("Please login before diagnosis.","message")
         return(render_template('home.html'))
@@ -122,15 +122,20 @@ def startDiagnosis():
 #Questionnaire2  
 @app.route('/questionnaire2', methods=['POST'])
 def questionnaire2():
-    answer1=[request.form['question1'],
-            request.form['question2'],
-            request.form['question3'],
-            request.form['question4'],
-            request.form['question5'],
-            request.form['question6'],
-            request.form['question7']]
+    try:
+        answer1=[
+                request.form['question1'],
+                request.form['question2'],
+                request.form['question3'],
+                request.form['question4'],
+                request.form['question5'],
+                request.form['question6'],
+                request.form['question7']]
+    except:
+        flash("Please fill every field","message")
+        return(render_template('Questionnaire1.html',user=session['username']))
     session['answer']= answer1
-    return(render_template('Questionnaire2.html'))
+    return(render_template('Questionnaire2.html',user=session['username']))
 
     
     
@@ -170,14 +175,18 @@ def result():
 def predict():
     if request.method == 'POST':
         # Get user form input (Yes/No answers)
-        answers2 = [
-            request.form['question8'],
-            request.form['question9'],
-            request.form['question10'],
-            request.form['question11'],
-            request.form['question12'],
-            request.form['question13'],
-            request.form['question14']]
+        try:
+            answers2 = [
+                request.form['question8'],
+                request.form['question9'],
+                request.form['question10'],
+                request.form['question11'],
+                request.form['question12'],
+                request.form['question13'],
+                request.form['question14']]
+        except:
+            flash("Please fill every field","message")
+            return(render_template('Questionnaire2.html',user=session['username']))
 
         answers=[]
         answers.extend(session['answer']) 

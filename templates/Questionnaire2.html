@@ -89,7 +89,7 @@
 
 <body>
     <div class="container">
-        <h1>Welcome, ['username']</h1>
+        <h1>Welcome, {{user}}</h1>
         <h2>Answer the following questions:</h2>
         <form method="post" action="{{ url_for('predict') }}">
             <div class="question">
