@@ -29,9 +29,20 @@
             margin-bottom: 20px;
             margin-top: 5px;
         }
+
+        h3{
+            font-family: 'Arial', sans-serif;            
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            margin-top: 5px;
+        }
         p {
-            font-size: 1.2em;
+            font-size: 1em;
             margin-bottom: 30px;
+            text-align: left;
+            line-height: 1.2;
+            margin-bottom: 18px; 
+    
         }
         strong {
             color:coral;
@@ -39,11 +50,12 @@
         }
         a {
             text-decoration:none;
-            background-color: #4a90e2;
+            background-color: #2f7fdb;
             color: white;
             padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1em;
+            border-radius: 8px;
+            font-size:small;
+            text-align:justify;
             transition: background-color 0.3s ease;
         }
         a:hover {
@@ -54,8 +66,8 @@
             padding: 20px;
             background:rgb(255, 255, 255);
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            opacity: 0.85;
+            box-shadow: 0 4px 10px rgba(82, 222, 238, 0.1);
+            opacity: 0.80;
         }
     </style>
 </head>
@@ -63,14 +75,16 @@
     <div class="container">
         <h1>Diagnosis Result</h1>
         <p>We are predicting that you may have: <strong>{{ prediction }}</strong></p>
-        <p>Suggested actions:</p>
+        <h3>Suggested actions:</h3>
         <p>{{ actions1 }}</p>
         <p>{{ actions2 }}</p>
         <p>{{ actions3 }}</p>
         <p>{{ actions4 }}</p>
-        <p>We also suggest listening to songs with {{ raaga }} raagas at {{ timeOfDay }}</p>
+        <b>
+        <p>We also suggest listening to songs with {{ raaga }} raagas at {{ timeOfDay }}.</p>
+        </b>
         <p>{{ description }}</p>
-        <p>Here are some suggested songs:</p>
+        <h3>Here are some suggested songs:</h3>
         <p><strong><a href="{{ link1 }}">{{ song1 }}</a></strong></p>
         <p><strong><a href="{{ link2 }}">{{ song2 }}</a></strong></p>
         <p><strong><a href="{{ link3 }}">{{ song3 }}</a></strong></p>
