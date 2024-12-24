@@ -91,6 +91,18 @@
     <div class="container">
         <h1>Welcome, {{user}}</h1>
         <h2>Answer the following questions:</h2>
+
+        {% with messages = get_flashed_messages(category_filter=["message"]) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <p class="flash-message">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        
         <form method="post" action="{{ url_for('predict') }}">
             <div class="question">
                 <label>8.Do you have difficulty concentrating, organizing thoughts, or making decisions?</label><br>

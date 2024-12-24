@@ -111,3 +111,16 @@ button {
     cursor: pointer;
     width: 100%;
 }
+
+.flash-messages {
+    margin-bottom: 18px;
+}
+
+.flash-message {
+    color: rgb(212, 32, 32);
+    font-weight: bold;
+    padding: 8px;
+    background-color: #ffe6e6;
+    border: 2px solid rgb(230, 130, 130);
+    border-radius: 2px;
+}

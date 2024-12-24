@@ -86,6 +86,19 @@
     <div class="container">
         <h1>Welcome, {{user}}</h1>
         <h2>Answer the following questions:</h2>
+
+
+        {% with messages = get_flashed_messages(category_filter=["message"]) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <p class="flash-message">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+
         <form method="POST" action="{{ url_for('questionnaire2') }}">
             <div class="question">
                 <label>1.Do you frequently experience excessive worry, fear, or restlessness, often accompanied by physical symptoms like heart palpitations, sweating, or trembling?</label><br>
