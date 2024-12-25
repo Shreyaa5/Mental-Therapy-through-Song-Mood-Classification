@@ -82,18 +82,25 @@ def login():
                 session['loggedin'] = True
                 session['username'] = username
                 session['user_id'] = user[0]
+                session['firstname'] = user[3]
                 return redirect(url_for('home'))
             else:
                 flash("Invalid login credentials", "error")
         else:
-            print("Connect is null")
+            #[SQL CONNECTION IS NULL]
+            flash("Server Error, Please Try Later", "error")
     return render_template('login.html')
 
 #Questionnaire1
 @app.route('/startDiagnosis', methods=['POST'])
 def startDiagnosis():
     if 'loggedin' in session:
-        return(render_template('Questionnaire1.html',user=session['username']))
+        try:
+            return(render_template('Questionnaire1.html',user=session['firstname']))
+        except:
+            flash("Some Error Occured","message")
+            return redirect(url_for('login'))
+
     else:
         flash("Please login before diagnosis.","message")
         return(render_template('home.html'))

@@ -81,7 +81,7 @@
 
         ol li {
             margin-bottom: 20px; /* Space between list items */
-            text-indent: -50px; /* Space between the number and the text */
+            text-indent: -20px; /* Space between the number and the text */
 
         }
 
@@ -107,9 +107,9 @@
             <li>{{ actions3 }}</li>
             <li>{{ actions4 }}</li>
         </ul>
-        <p>
+        <p><b>
             We also suggest listening to songs with <strong>{{ raaga }}</strong> raagas at <strong>{{ timeOfDay }}</strong>.
-        </p>
+        </p><b>
         <p>{{ description }}</p>
         <h3>Here are some suggested songs:</h3>
         <!-- <p><strong><a href="{{ link1 }}">{{ song1 }}</a></strong></p>
@@ -117,11 +117,11 @@
         <p><strong><a href="{{ link3 }}">{{ song3 }}</a></strong></p>
          -->
 
-         <ol>
+         <ul class="bullet-list">
             <li><strong><a href="{{ link1 }}">{{ song1 }}</a></strong></li>
             <li><strong><a href="{{ link2 }}">{{ song2 }}</a></strong></li>
             <li><strong><a href="{{ link3 }}">{{ song3 }}</a></strong></li>
-        </ol>
+        </ul>
         <div class="back-to-home">
             <a href="{{ url_for('home') }}">Back to Home</a>
         </div>    
