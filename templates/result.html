@@ -9,6 +9,145 @@
             font-family: 'Arial', sans-serif;
             background-image: url("/static/images/bg3.webp"); 
             background-size: cover;
+            background-position: center;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 2.3em;
+            color: #00499c;
+            margin-bottom: 20px;
+            margin-top: 5px;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1em;
+            margin-bottom: 18px; 
+            text-align: left;
+            line-height: 1.4;
+        }
+        ul.bullet-list {
+            list-style-type: disc;
+            padding-left: 30px;
+            margin-top: 10px;
+            text-align: left;
+        }
+        ul.bullet-list li {
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        strong {
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 1.3em;
+            word-spacing: 1.4;
+            color:mediumpurple;
+        }
+        a {
+            text-decoration: none;
+            background-color: #2f7fdb;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: small;
+            transition: background-color 0.3s ease;
+            /* display: inline-block; */
+        }
+        a:hover {
+            background-color: #00499c;
+        }
+
+        .back-to-home {
+        position: absolute; /* Allow placement relative to the page */
+        top: 20px; /* Distance from the top of the page */
+        right: 20px; /* Distance from the right of the page */
+        }
+
+        ol {
+            margin-left: 20px; /* Adjust space before the list */
+            padding-left: 10px; /* Adjust space between numbers and text */
+        }
+
+        ol li {
+            margin-bottom: 20px; /* Space between list items */
+            text-indent: -50px; /* Space between the number and the text */
+
+        }
+
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background: rgb(255, 255, 255);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(82, 222, 238, 0.1);
+            opacity: 0.90;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diagnosis Result</h1>
+        <p>We are predicting that you may have: <strong>{{ prediction }}</strong></p>
+        <h3>Suggested actions:</h3>
+        <ul class="bullet-list">
+            <li>{{ actions1 }}</li>
+            <li>{{ actions2 }}</li>
+            <li>{{ actions3 }}</li>
+            <li>{{ actions4 }}</li>
+        </ul>
+        <p>
+            We also suggest listening to songs with <strong>{{ raaga }}</strong> raagas at <strong>{{ timeOfDay }}</strong>.
+        </p>
+        <p>{{ description }}</p>
+        <h3>Here are some suggested songs:</h3>
+        <!-- <p><strong><a href="{{ link1 }}">{{ song1 }}</a></strong></p>
+        <p><strong><a href="{{ link2 }}">{{ song2 }}</a></strong></p>
+        <p><strong><a href="{{ link3 }}">{{ song3 }}</a></strong></p>
+         -->
+
+         <ol>
+            <li><strong><a href="{{ link1 }}">{{ song1 }}</a></strong></li>
+            <li><strong><a href="{{ link2 }}">{{ song2 }}</a></strong></li>
+            <li><strong><a href="{{ link3 }}">{{ song3 }}</a></strong></li>
+        </ol>
+        <div class="back-to-home">
+            <a href="{{ url_for('home') }}">Back to Home</a>
+        </div>    
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis Result</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url("/static/images/bg3.webp"); 
+            background-size: cover;
             background-position:center;
             
             /* background-color: #f4f8fb; */
@@ -24,7 +163,7 @@
         }
         h1 {
             font-family:Verdana, Geneva, Tahoma, sans-serif;
-            font-size: 2.4em;
+            font-size: 2.3em;
             color: #00499c;
             margin-bottom: 20px;
             margin-top: 5px;
@@ -42,8 +181,19 @@
             text-align: left;
             line-height: 1.2;
             margin-bottom: 18px; 
-    
         }
+
+        .bullet-list {
+            list-style-position:outside; /* Ensures bullets are left-aligned */
+            padding-left: 20px; /* Add space between bullets and text */
+
+        }
+        .bullet-list li {
+            margin-left: -8px; /* Fine-tune the position of the bullets */
+            text-indent: -450px; /* Adds space between the bullet and the text */
+
+        } */
+
         strong {
             color:coral;
             font-size: 1.5em;
@@ -76,10 +226,15 @@
         <h1>Diagnosis Result</h1>
         <p>We are predicting that you may have: <strong>{{ prediction }}</strong></p>
         <h3>Suggested actions:</h3>
-        <p>{{ actions1 }}</p>
-        <p>{{ actions2 }}</p>
-        <p>{{ actions3 }}</p>
-        <p>{{ actions4 }}</p>
+        <p>
+        <ul class="bullet-list">
+        <li>{{ actions1 }}</li>
+        <li>{{ actions2 }}</li>
+        <li>{{ actions3 }}</li>
+        <li>{{ actions4 }}</li>
+        </ul>
+        </p>        
+        
         <b>
         <p>We also suggest listening to songs with {{ raaga }} raagas at {{ timeOfDay }}.</p>
         </b>
@@ -92,4 +247,5 @@
         <a href="{{ url_for('home') }}">Back to Home</a>
     </div>
 </body>
-</html>
+</html> -->
+
