@@ -140,9 +140,9 @@ def questionnaire2():
                 request.form['question7']]
     except:
         flash("Please fill every field","message")
-        return(render_template('Questionnaire1.html',user=session['username']))
+        return(render_template('Questionnaire1.html',user=session['firstname']))
     session['answer']= answer1
-    return(render_template('Questionnaire2.html',user=session['username']))
+    return(render_template('Questionnaire2.html',user=session['firstname']))
 
     
     
