@@ -83,6 +83,7 @@ def login():
                 session['username'] = username
                 session['user_id'] = user[0]
                 session['firstname'] = user[3]
+                session['membership'] = user[7]
                 return redirect(url_for('home'))
             else:
                 flash("Invalid login credentials", "error")
@@ -146,38 +147,6 @@ def questionnaire2():
 
     
     
-# Result Route (Display prediction)
-@app.route('/result')
-def result():
-    return render_template('result.html')
-
-# # Prediction API (to interact with the ML model)
-# @app.route('/predict', methods=['POST'])
-# def predict():
-#     if request.method == 'POST':
-#         # Get user form input (Yes/No answers)
-#         answers2 = [
-#             request.form['question14'],
-#             request.form['question15'],
-#             request.form['question16'],
-#             request.form['question17'],
-#             request.form['question18'],
-#             request.form['question19'],
-#             request.form['question20'],
-#             request.form['question21'],
-#             request.form['question22'],
-#             request.form['question23'],
-#             request.form['question24'],
-#             request.form['question25'],
-#             request.form['question26'],
-#             request.form['question27']
-#         ]
-#         answers=[]
-#         answers.extend(session['answer']) 
-#         answers.extend(answers2)
-
-############################################################
-# Prediction API (to interact with the ML model)
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
@@ -212,6 +181,8 @@ def predict():
         # # Return the result to the user
         # return render_template('result.html', prediction=prediction[0])
         #####################################################################
+        is_member = True if session['membership'] == "active" else False
+
 
         # Logic to calculate disorder scores
 
@@ -343,7 +314,7 @@ def predict():
             forthAction = "Cognitive Behavioral Therapy (CBT): Work with a therapist to address delusional thinking or distressing emotions."
 
         # Pass prediction to result page
-        return render_template('result.html', prediction=most_likely_disorder,link1=link1,link2=link1,link3=link1,description=desc,actions1=firstAction,actions2=secondAction,actions3=thirdAction,actions4=forthAction,song1=song1,song2=song2,song3=song3, raaga=raag,timeOfDay=TOD)
+        return render_template('result.html', prediction=most_likely_disorder,link1=link1,link2=link2,link3=link3,description=desc,actions1=firstAction,actions2=secondAction,actions3=thirdAction,actions4=forthAction,song1=song1,song2=song2,song3=song3, raaga=raag,timeOfDay=TOD,is_member=is_member)
 
 
 if __name__ == '__main__':
