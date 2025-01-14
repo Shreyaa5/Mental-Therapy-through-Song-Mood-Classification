@@ -72,7 +72,16 @@
         position: absolute; /* Allow placement relative to the page */
         top: 20px; /* Distance from the top of the page */
         right: 20px; /* Distance from the right of the page */
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
         }
+
+        .back-to-home:hover {
+            background-color: #00499c; /* Darker blue on hover */
+            transform: scale(1.05); /* Slightly enlarge button on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+        }
+
 
         ol {
             margin-left: 20px; /* Adjust space before the list */
@@ -87,33 +96,59 @@
 
 
         .container {
-            max-width: 600px;
-            padding: 20px;
+            max-width: 1000px;
+            padding: 10px;
             background: rgb(255, 255, 255);
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(82, 222, 238, 0.1);
-            opacity: 0.90;
+            opacity: 0.80;
         }
 
-        .blur {
-            filter: blur(10px);
-            pointer-events: none;
+        .blurred {
+            color: rgba(0, 0, 0, 0.1); /* Make text invisible */
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a blurred shadow */
+            pointer-events: none; /* Prevent selection or interaction */
+            user-select: none; /* Disable text selection */
+            opacity: 8;
         }
-        .blur-container {
-            position: relative;
+
+        .blurred-box {
+            border: 1px solid #ccc; /* Light border for the box */
+            border-radius: 8px; /* Rounded corners */
+            padding: 10px; /* Spacing inside the box */
+            background: rgba(0, 0, 0, 0.05); /* Light background for distinction */
+            text-align: center; /* Center-align text */
+            margin: 10px 0; /* Space between boxes */
         }
-        .blur-container .buy-membership {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            z-index: 10;
+
+        .buy-membership {
+            background-color: #2f7fdb; /* Blue background */
+            color: white; /* White text */
+            padding: 12px 24px; /* Add padding for better spacing */
+            border: none; /* Remove border */
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border-radius: 8px; /* Rounded corners */
+            font-size: 16px; /* Font size for readability */
+            font-weight: bold; /* Bold text for emphasis */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
         }
+
+        .buy-membership:hover {
+            background-color: #00499c; /* Darker blue on hover */
+            transform: scale(1.05); /* Slightly enlarge button on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+        }
+
+        .buy-membership:active {
+            background-color: #003366; /* Even darker blue when clicked */
+            transform: scale(1); /* Reset scale to normal on click */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow when clicked */
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -128,12 +163,22 @@
                 <li>{{ actions3 }}</li>
                 <li>{{ actions4 }}</li>
             {% else %}
-                <li class="blurred">Additional action</li>
-                <li class="blurred">Additional action</li>
+            <li>
+                <div class="blurred-box">
+                    <span class="blurred">This content is available to members only</span>
+                </div>
+            </li>
+            <li>
+                <div class="blurred-box">
+                    <span class="blurred">This content is available to members only</span>
+                </div>
+            </li>
 
-                </div>
-                    <button class="buy-membership" onclick="location.href='{{ url_for('membership') }}'">Buy Membership</button>
-                </div>
+            <form action="{{ url_for('membership') }}" method="get" style="display: inline;">
+                <button type="submit" class="buy-membership">Buy Membership</button>
+            </form>
+                
+                            
             {% endif %}
         </ul>
         <p><b>
@@ -152,8 +197,16 @@
                 <li><strong><a href="{{ link2 }}">{{ song2 }}</a></strong></li>
                 <li><strong><a href="{{ link3 }}">{{ song3 }}</a></strong></li>
             {% else %}
-                <li class="blurred">Additional song</li>
-                <li class="blurred">Additional song</li>
+            <li>
+                <div class="blurred-box">
+                    <span class="blurred">This content is available to members only</span>
+                </div>
+            </li>
+            <li>
+                <div class="blurred-box">
+                    <span class="blurred">This content is available to members only</span>
+                </div>
+            </li>
             {% endif %}
         </ul>
         <div class="back-to-home">

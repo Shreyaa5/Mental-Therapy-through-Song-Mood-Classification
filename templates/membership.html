@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Membership</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url("/static/images/membership.png");
+            background-size:cover;
+            background-position: center;
+            color: #333;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            padding: 50px;
+            background: rgb(255, 255, 255);
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(82, 222, 238, 0.1);
+            opacity: 0.90;
+            text-align: center;
+        }
+        h1 {
+            color: #00499c;
+            margin-bottom: 20px;
+        }
+        .benefits {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .price {
+            font-size: 24px;
+            color: #2f7fdb;
+            margin: 20px 0;
+        }
+        .purchase-btn {
+            background-color: #2f7fdb;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .purchase-btn:hover {
+            background-color: #00499c; /* Darker blue on hover */
+            transform: scale(1.05); /* Slightly enlarge button on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+        }
+
+        .back-btn {
+        position: absolute; /* Allow placement relative to the page */
+        top: 20px; /* Distance from the top of the page */
+        right: 20px; /* Distance from the right of the page */
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color: #2f7fdb;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        
+
+        }
+
+        .back-btn:hover {
+            background-color: #00499c; /* Darker blue on hover */
+            transform: scale(1.05); /* Slightly enlarge button on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Premium Membership</h1>
+        <div class="benefits">
+            <h3>Benefits include:</h3>
+            <ul>
+                <li>Access to additional recommended actions</li>
+                <li>Full song recommendations</li>
+                <li>Detailed mental health insights</li>
+                <li>Personalized therapeutic music suggestions</li>
+            </ul>
+        </div>
+        <div class="price">
+            Price: ₹399/month
+        </div>
+        <form method="POST" action="{{ url_for('membership') }}">
+            <button type="submit" class="purchase-btn">Activate Membership</button>
+        </form>
+        <a href="{{ url_for('home') }}" class="back-btn">Back to Home</a>
+    </div>
+</body>
+</html>

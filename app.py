@@ -153,8 +153,9 @@ def predict():
         answers = [1 if answer == 'Yes' else 0 for answer in answers]
 
        
-        is_member = True if session['membership'] == "active" else False
-
+        user = {
+            'is_member': True if session['membership'] == "active" else False
+        }
 
         # Logic to calculate disorder scores
 
@@ -286,7 +287,26 @@ def predict():
             forthAction = "Cognitive Behavioral Therapy (CBT): Work with a therapist to address delusional thinking or distressing emotions."
 
         # Pass prediction to result page
-        return render_template('result.html', prediction=most_likely_disorder,link1=link1,link2=link2,link3=link3,description=desc,actions1=firstAction,actions2=secondAction,actions3=thirdAction,actions4=forthAction,song1=song1,song2=song2,song3=song3, raaga=raag,timeOfDay=TOD,is_member=is_member)
+        return render_template('result.html',user=user, prediction=most_likely_disorder,link1=link1,link2=link2,link3=link3,description=desc,actions1=firstAction,actions2=secondAction,actions3=thirdAction,actions4=forthAction,song1=song1,song2=song2,song3=song3, raaga=raag,timeOfDay=TOD)
+    
+    
+     # membership
+@app.route('/membership', methods=['GET', 'POST'])
+def membership():
+        if 'loggedin' in session:
+            if request.method == 'POST':
+                # Handle membership purchase logic here
+                user_id = session['user_id']
+                cur = sql_connection.cursor()
+                cur.execute('UPDATE users SET membership = "active" WHERE id = %s', (user_id,))
+                sql_connection.commit()
+                session['membership'] = "active"
+                flash("Membership activated successfully!", "success")
+                return redirect(url_for('home'))
+            return render_template('membership.html')
+        else:
+            flash('Please log in to purchase membership.', 'error')
+            return redirect(url_for('result.html'))
 
 
 if __name__ == '__main__':
