@@ -106,26 +106,7 @@ def startDiagnosis():
         flash("Please login before diagnosis.","message")
         return(render_template('home.html'))
     
-#################################################################
-# #Questionnaire2  
-# @app.route('/questionnaire2', methods=['POST'])
-# def questionnaire2():
-#     answer1=[request.form['question1'],
-#             request.form['question2'],
-#             request.form['question3'],
-#             request.form['question4'],
-#             request.form['question5'],
-#             request.form['question6'],
-#             request.form['question7'],
-#             request.form['question8'],
-#             request.form['question9'],
-#             request.form['question10'],
-#             request.form['question11'],
-#             request.form['question12'],
-#             request.form['question13']]
-#     session['answer']= answer1
-#     return(render_template('Questionnaire2.html'))
-############################################################
+
 
 #Questionnaire2  
 @app.route('/questionnaire2', methods=['POST'])
@@ -171,16 +152,7 @@ def predict():
         # Convert answers to numerical values (e.g., Yes = 1, No = 0)
         answers = [1 if answer == 'Yes' else 0 for answer in answers]
 
-        #####################################################################
-        # # Convert to numpy array and reshape for the model
-        # features = np.array(answers).reshape(1, -1)
-        
-        # # Predict using the ML model
-        # prediction = model.predict(features)
-        
-        # # Return the result to the user
-        # return render_template('result.html', prediction=prediction[0])
-        #####################################################################
+       
         is_member = True if session['membership'] == "active" else False
 
 
