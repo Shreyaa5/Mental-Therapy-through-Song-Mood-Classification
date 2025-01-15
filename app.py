@@ -54,7 +54,7 @@ def register():
                 cur.execute('INSERT INTO users (username, password, firstName, lastName, phoneNumber, emailId) VALUES (%s, %s, %s, %s, %s, %s)', (username, password, firstName, lastName, phoneNumber, emailId))
                 sql_connection.commit()
                 flash('You have successfully registered', 'success')
-                return redirect(url_for('login'))
+                return redirect(url_for('login.html'))
             else:
                 print("connect is null")
         else:
