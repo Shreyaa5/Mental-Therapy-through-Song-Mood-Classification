@@ -3,6 +3,8 @@ import numpy as np
 from joblib import load
 import mysql.connector
 import re
+import razorpay
+import razorpay.errors
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -16,8 +18,11 @@ sql_connection = mysql.connector.connect(
         database = "flask_ml_db",
         port = "3316"
     )
-# Load ML model
-#model = load('model.sav')
+
+RAZORPAY_KEY_ID = "rzp_test_iXumXBu7UMOLEf"
+RAZORPAY_KEY_SECRET = "DbnMUMaSxdlLkTNCZ0ruZb7R"
+
+razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID,RAZORPAY_KEY_SECRET))
 
 # Home Page
 @app.route('/')
@@ -286,27 +291,57 @@ def predict():
             thirdAction = "Establishing Hygiene Routines: Create a checklist for daily self-care tasks like bathing, grooming, and dressing."
             forthAction = "Cognitive Behavioral Therapy (CBT): Work with a therapist to address delusional thinking or distressing emotions."
 
+
+
         # Pass prediction to result page
         return render_template('result.html',user=user, prediction=most_likely_disorder,link1=link1,link2=link2,link3=link3,description=desc,actions1=firstAction,actions2=secondAction,actions3=thirdAction,actions4=forthAction,song1=song1,song2=song2,song3=song3, raaga=raag,timeOfDay=TOD)
     
     
      # membership
-@app.route('/membership', methods=['GET', 'POST'])
+@app.route('/membership', methods=['POST'])
 def membership():
-        if 'loggedin' in session:
-            if request.method == 'POST':
-                # Handle membership purchase logic here
-                user_id = session['user_id']
-                cur = sql_connection.cursor()
-                cur.execute('UPDATE users SET membership = "active" WHERE id = %s', (user_id,))
-                sql_connection.commit()
-                session['membership'] = "active"
-                flash("Membership activated successfully!", "success")
-                return redirect(url_for('home'))
-            return render_template('membership.html')
-        else:
-            flash('Please log in to purchase membership.', 'error')
-            return redirect(url_for('result.html'))
+        if request.method == 'POST':    
+            return render_template('membership.html',key_id=RAZORPAY_KEY_ID)
+
+@app.route('/verify', methods=['POST'])
+def verify_payment():
+    #Get Data From Razorpay checkout
+        payment_id = request.form.get("razorpay_payment_id")
+        order_id = request.form.get("razorpay_order_id")
+        signature = request.form.get("razorpay_signature")
+        #Verify signature
+        try:
+            razorpay_client.utility.verify_payment_signature({
+                "razorpay_payment_id": payment_id,
+                "razorpay_order_id": order_id,
+                "razorpay_signature": signature
+            })
+            #Update membership status
+            user_id = session['user_id']
+            cur = sql_connection.cursor()
+            cur.execute('UPDATE users SET membership = "active" WHERE id = %s', (user_id,))
+            sql_connection.commit()
+            session['membership'] = "active"
+            flash("Membership activated successfully!", "success")
+            return redirect(url_for('home'))
+        except razorpay.errors.SignatureVerificationError:
+            flash("Signature verification failed", "error")
+            return render_template('membership.html',key_id=RAZORPAY_KEY_ID)
+
+        
+@app.route('/order', methods=['POST'])
+def create_order():
+    if 'loggedin' in session:
+        amount = 500 #In Paise
+        currency = "INR"
+
+        order_data = {"amount":amount,
+                      "currency":currency }
+        razorpay_order = razorpay_client.order.create(data=order_data)
+        return{"order_id":razorpay_order['id'],"amount":amount}
+    else:
+        flash('Please log in to purchase membership.', 'error')
+        return redirect(url_for('login.html'))
 
 
 if __name__ == '__main__':

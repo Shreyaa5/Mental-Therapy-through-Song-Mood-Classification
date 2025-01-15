@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buy Membership</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -97,9 +98,31 @@
         <div class="price">
             Price: ₹399/month
         </div>
-        <form method="POST" action="{{ url_for('membership') }}">
-            <button type="submit" class="purchase-btn">Activate Membership</button>
-        </form>
+            <button id="purchase-btn" class="purchase-btn">Activate Membership</button>
+            <script>
+                document.getElementById('purchase-btn').onclick = function(e){
+                    //Creating an order
+                    fetch('/order', {method : 'POST'})
+                    .then(response => response.json())
+                    .then(order =>{
+                        //Configuring razorpay options
+                        const options = {
+                            "key": "{{ key_id }}",
+                            "amount": order.amount,
+                            "currency": "INR",
+                            "name": "Mellow Minds",
+                            "description": "Payment for order #"+order.order_id,
+                            "order_id": order.order_id,
+                            "callback_url": "/verify"
+                        };
+
+                        //Razorpay Checkout
+                        const razp = new Razorpay(options);
+                        razp.open();
+                    })
+                    .catch(err => alert("Error Creating order"))
+                };
+            </script>
         <a href="{{ url_for('home') }}" class="back-btn">Back to Home</a>
     </div>
 </body>
