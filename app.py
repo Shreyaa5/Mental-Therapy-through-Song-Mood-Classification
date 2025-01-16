@@ -298,6 +298,24 @@ def predict():
             secondAction = "Reading or Audiobooks: Explore uplifting or educational material to stay mentally active."
             thirdAction = "Establishing Hygiene Routines: Create a checklist for daily self-care tasks like bathing, grooming, and dressing."
             forthAction = "Cognitive Behavioral Therapy (CBT): Work with a therapist to address delusional thinking or distressing emotions."
+        
+        session['premium'] = user
+        session['disorder'] = most_likely_disorder
+        session['link1'] = link1
+        session['link2'] = link2
+        session['link3'] = link3
+        session['desc'] = desc
+        session['a1'] = firstAction
+        session['a2'] = secondAction
+        session['a3'] = thirdAction
+        session['a4'] = forthAction
+        session['s1'] = song1
+        session['s2'] = song2
+        session['s3'] = song3
+        session['raag'] = raag
+        session['tod'] = TOD
+
+
 
 
 
@@ -331,7 +349,8 @@ def verify_payment():
             sql_connection.commit()
             session['membership'] = "active"
             flash("Membership activated successfully!", "success")
-            return redirect(url_for('home'))
+            #return redirect(url_for('home'))
+            return render_template('result.html',user={'is_member':True}, prediction=session['disorder'],link1=session['link1'],link2=session['link2'],link3=session['link3'],description=session['desc'],actions1=session['a1'],actions2=session['a2'],actions3=session['a3'],actions4=session['a4'],song1=session['s1'],song2=session['s2'],song3=session['s3'], raaga=session['raag'],timeOfDay=session['tod'])
         except razorpay.errors.SignatureVerificationError:
             flash("Signature verification failed", "error")
             return render_template('membership.html',key_id=RAZORPAY_KEY_ID)
@@ -340,7 +359,7 @@ def verify_payment():
 @app.route('/order', methods=['POST'])
 def create_order():
     if 'loggedin' in session:
-        amount = 500 #In Paise
+        amount = 9900 #In Paise
         currency = "INR"
 
         order_data = {"amount":amount,
