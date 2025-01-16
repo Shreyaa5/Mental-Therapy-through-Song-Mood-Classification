@@ -26,14 +26,17 @@ razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID,RAZORPAY_KEY_SECRET))
 
 #landing
 @app.route('/')
-def landing_page():
-    return render_template('landing.html')
-
-# Home Page
-@app.route('/')
 def home():
     if 'loggedin' in session:
-        return render_template('home.html')
+        return render_template('landing.html')
+    else:
+        return redirect(url_for('login'))
+
+#Diagnosis
+@app.route('/diagnosis')
+def diagnosis():
+    if 'loggedin' in session:
+        return render_template('diagnosis.html')
     else:
         return redirect(url_for('login'))
 
@@ -114,7 +117,7 @@ def startDiagnosis():
 
     else:
         flash("Please login before diagnosis.","message")
-        return(render_template('home.html'))
+        return(render_template('landing.html'))
     
 
 

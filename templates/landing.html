@@ -234,16 +234,18 @@
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-                <li><a href="{{ url_for('register') }}">Register</a></li>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <!-- <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li> -->
+                <form action="/logout" method="post">
+                    <button type="submit">Log out</button>
+                </form>
             </div>
         </div>
     </nav>
 
     <section id="home">
         <div class="section-content">
-            <h1>Welcome to MeloMind</h1>
+            <h1>Welcome to MeloW Mind</h1>
             <p>Your companion in mental wellness. Here, we believe in the healing power of self-awareness 
                 and the transformative energy of music. Our unique platform guides you through a personalized 
                 journey, helping you explore your mental health with insight, care, and compassion.</p>
