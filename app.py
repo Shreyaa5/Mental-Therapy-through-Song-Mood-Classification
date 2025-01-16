@@ -24,6 +24,11 @@ RAZORPAY_KEY_SECRET = "DbnMUMaSxdlLkTNCZ0ruZb7R"
 
 razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID,RAZORPAY_KEY_SECRET))
 
+#landing
+@app.route('/')
+def landing_page():
+    return render_template('landing.html')
+
 # Home Page
 @app.route('/')
 def home():
