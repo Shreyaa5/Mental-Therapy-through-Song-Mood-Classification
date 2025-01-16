@@ -11,6 +11,7 @@ body {
 }
 
 .container {
+    width: 50%;
     background-color: rgba(255, 255, 255, 0.7); 
     padding: 20px;
     border-radius: 8px;
@@ -21,6 +22,9 @@ body {
     align-self:baseline;
 }
 
+.content-spacing{
+    display: flex;
+}
 
 h3 {
     color:darkslategrey;

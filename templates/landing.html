@@ -119,6 +119,7 @@
             font-size: 2rem;
             color: #2c3e50;
             margin-bottom: 1rem;
+            margin-top: 20px;
         }
 
         h3 {
@@ -130,7 +131,8 @@
         p {
             margin-bottom: 1.5rem;
             color: #666;
-            text-align: justify;
+            text-align: flex;
+
         }
 
         /* Form Styles */
@@ -199,7 +201,6 @@
             text-align: left;      /* Ensures left alignment */
         }
 
-        /* Optional: Customize list items */
         ul li {
             line-height: 1.6;      /* Adjust line spacing for readability */
         }
@@ -246,11 +247,17 @@
     <section id="home">
         <div class="section-content">
             <h1>Welcome to MeloW Mind</h1>
-            <p>Your companion in mental wellness. Here, we believe in the healing power of self-awareness 
+            <div class="content-spacing">
+            <p style="width: 50%;">Your companion in mental wellness. Here, we believe in the healing power of self-awareness 
                 and the transformative energy of music. Our unique platform guides you through a personalized 
                 journey, helping you explore your mental health with insight, care, and compassion.</p>
-                
-            <button onclick="location.href='#about'">Learn More</button>
+            </div>
+            <div class="content-spacing">
+                <div style="width: 50%;">
+                    <button onclick="location.href='#about'" style="margin-right: 10px;">Learn More</button>
+                    <button onclick="location.href='diagnosis'">Click to Diagnosis</button>
+                </div>
+            </div>
             
         </div>
     </section>
