@@ -186,12 +186,13 @@
         </p><b>
         {% if user.is_member %}
         <p>{{ description }}</p>
-        {% endif %}
+        {% else %}
         <li>
             <div class="blurred-box">
                 <span class="blurred"><p>{{ description }}</p></span>
             </div>
         </li>
+        {% endif %}
         <h3>Here are some suggested songs:</h3>
         <!-- <p><strong><a href="{{ link1 }}">{{ song1 }}</a></strong></p>
         <p><strong><a href="{{ link2 }}">{{ song2 }}</a></strong></p>
