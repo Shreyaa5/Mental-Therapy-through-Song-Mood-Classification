@@ -139,13 +139,13 @@
     <div class="container">
         <h2>Login</h2>
         <!-- Display flash messages with category-based classes -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
+        <!-- {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
                     <div class="flash-message {{ category }}">{{ message }}</div>
                 {% endfor %}
             {% endif %}
-        {% endwith %}
+        {% endwith %} -->
 
         <!-- Login form -->
         <form method="POST" action="{{ url_for('login') }}">
