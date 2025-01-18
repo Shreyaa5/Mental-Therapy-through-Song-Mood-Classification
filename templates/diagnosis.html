@@ -67,7 +67,7 @@
             right: 20px;
         }
 
-        .logout-button button {
+        .logout-button {
             padding: 10px 20px;
             font-size: 14px;
             color: #fff;
@@ -78,7 +78,7 @@
             transition: background-color 0.3s ease;
         }
 
-        .logout-button button:hover {
+        .logout-button :hover {
             background-color:aqua; /*  for hover */
         }
 
@@ -103,24 +103,10 @@
         }
 
         
+       
 
-
-        /* Updated header controls styling */
-        .header-controls {
-            position: absolute;
-            top: 20px;
-            right: 150px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
 
         .profile-button {
-            position: relative;
-            display: inline-block;
-        }
-
-        .profile-btn {
             padding: 10px 20px;
             font-size: 14px;
             color: #fff;
@@ -128,15 +114,15 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            position: relative;
+            /* display: inline-block; */
             transition: background-color 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 18px;
         }
 
-        .profile-btn:hover {
-            background-color: #008b8b;
-        }
+
 
         .status-indicator {
             width: 10px;
@@ -169,38 +155,68 @@
 
         .profile-button:hover .profile-dropdown {
             display: block;
+            background-color: #008b8b;
         }
+
+        
 
         .profile-info {
             padding: 10px;
             border-bottom: 1px solid #eee;
         }
 
-        .status-label {
+        /* .status-label {
             font-size: 12px;
             color: #666;
             margin-top: 5px;
-        }
+        } */
 
-        .membership-actions {
+        /* .membership-actions {
             padding: 4px 8px;
-        }
+        } */
 
-        .upgrade-btn {
-            width: 100%;
-            padding: 6px;
-            background-color: #16a085;
-            color: white;
+        .membership-actions button {
+            padding: 8px 16px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #007bff;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
-            margin-top: 0;  /* Removed top margin */
-            font-size: 13px;
+            transition: background-color 0.3s ease;
         }
 
-        .upgrade-btn:hover {
-            background-color: #138a72;
+        .flash-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-in-out;
         }
+
+        .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .flash-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        
+
+
 
         @media (max-width: 600px) {
             .home-page {
@@ -230,26 +246,20 @@
         </form>
     </div> -->
 
-    <!-- <div class="header-controls">
-        <div class="profile-button">
-            <button class="profile-btn">
-                Profile
-                Comment it out[Change class to status-member for members] 
-                <span class="status-indicator status-new"></span>
-            </button>
-            <div class="profile-dropdown">
-                <div class="profile-info">
-                    <div class="status-label">New User</div>
-                </div>
-                <div class="membership-actions">
-                    <button class="upgrade-btn">Buy membership</button>
+    <!-- <header class="header">
+        <div class="header-content">
+            <div class="profile-button">
+                <button class="button">
+                    Profile
+                    <span class="status-indicator status-new"></span>
+                </button>
+                <div class="profile-dropdown">
+                    <div>New User</div>
+                    <button class="button" style="margin-top: 0.5rem; width: 100%;">Buy membership</button>
                 </div>
             </div>
         </div>
-         <form action="/logout" method="post">
-            <button type="submit">Log out</button>
-        </form>
-    </div> -->
+    </header> -->
 
     <div class="home-page">
         <h1 class="welcome-text">Let's start the Diagnosis</h1>
@@ -282,6 +292,21 @@
                 
             </form>
         </div>
+
+        <div id="flash-messages"></div>
+        <script>
+            // Flash message handling
+            function showFlashMessage(message, category) {
+                const flashDiv = document.createElement('div');
+                flashDiv.className = `flash-message ${category}`;
+                flashDiv.textContent = message;
+                document.getElementById('flash-messages').appendChild(flashDiv);
+                
+                setTimeout(() => {
+                    flashDiv.remove();
+                }, 5000);
+            }
+        </script>
 
         
 

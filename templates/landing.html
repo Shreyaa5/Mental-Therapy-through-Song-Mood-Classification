@@ -30,7 +30,7 @@
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1500px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -206,6 +206,36 @@
             line-height: 1.6;      /* Adjust line spacing for readability */
         }
 
+        /* .header {
+            background-color: transparent;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 20%;
+            top: 0;
+            z-index: 500;
+        }
+
+        .header-content {
+            max-width: 200px;
+            margin: auto auto;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        } */
+
+        /* .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1rem;
+            min-width: 200px;
+            display: none;
+        } */ 
+
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -236,14 +266,17 @@
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
+               >
                 <!-- <li><a href="{{ url_for('login') }}">Login</a></li>
                 <li><a href="{{ url_for('register') }}">Register</a></li> -->
                 <form action="/logout" method="post">
                     <button type="submit">Log out</button>
                 </form>
+
             </div>
         </div>
     </nav>
+
 
     <section id="home">
         <div class="section-content">
