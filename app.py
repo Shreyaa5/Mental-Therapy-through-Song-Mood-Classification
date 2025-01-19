@@ -135,9 +135,9 @@ def questionnaire2():
                 request.form['question7']]
     except:
         flash("Please fill every field","message")
-        return(render_template('Questionnaire1.html',user=session['username']))
+        return(render_template('Questionnaire1.html',user=session['firstname']))
     session['answer']= answer1
-    return(render_template('Questionnaire2.html',user=session['username']))
+    return(render_template('Questionnaire2.html',user=session['firstname']))
 
     
     
@@ -182,10 +182,13 @@ def predict():
         }
 
         # Determine the most likely disorder
-        most_likely_disorder = max(disorder_scores, key=disorder_scores.get) if max(disorder_scores, key=disorder_scores.get) !=0 else "None"
+        if disorder_scores[max(disorder_scores, key=disorder_scores.get)] !=0:
+            most_likely_disorder = max(disorder_scores, key=disorder_scores.get)  
+        else:
+            most_likely_disorder = "None"
 
         if(most_likely_disorder == "None"):
-            return render_template('healthy.html',user=session['firstname'])
+            return render_template('healthy.html',name=session['firstname'])
 
         
 
