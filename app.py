@@ -185,9 +185,9 @@ def predict():
         if disorder_scores[max(disorder_scores, key=disorder_scores.get)] !=0:
             most_likely_disorder = max(disorder_scores, key=disorder_scores.get)  
         else:
-            most_likely_disorder = "None"
+            most_likely_disorder = "Healthy"
 
-        if(most_likely_disorder == "None"):
+        if(most_likely_disorder == "Healthy"):
             return render_template('healthy.html',name=session['firstname'])
 
         
@@ -306,7 +306,13 @@ def predict():
             secondAction = "Reading or Audiobooks: Explore uplifting or educational material to stay mentally active."
             thirdAction = "Establishing Hygiene Routines: Create a checklist for daily self-care tasks like bathing, grooming, and dressing."
             forthAction = "Cognitive Behavioral Therapy (CBT): Work with a therapist to address delusional thinking or distressing emotions."
-        
+
+        #Adding the latest predicted data in responses table
+        cur = sql_connection.cursor()
+        cur.execute('INSERT INTO responses (user_id, disorder) VALUES (%s, %s)', (session['user_id'],most_likely_disorder))
+        sql_connection.commit()
+
+
         session['premium'] = user
         session['disorder'] = most_likely_disorder
         session['link1'] = link1
