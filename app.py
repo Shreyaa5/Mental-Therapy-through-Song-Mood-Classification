@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 import numpy as np
-from joblib import load
+#from joblib import load
 import mysql.connector
 import re
 import razorpay
@@ -67,7 +67,7 @@ def register():
                 cur.execute('INSERT INTO users (username, password, firstName, lastName, phoneNumber, emailId) VALUES (%s, %s, %s, %s, %s, %s)', (username, password, firstName, lastName, phoneNumber, emailId))
                 sql_connection.commit()
                 flash('You have successfully registered', 'success')
-                return redirect(url_for('login.html'))
+                return redirect(url_for('login'))
             else:
                 print("connect is null")
         else:
@@ -182,7 +182,12 @@ def predict():
         }
 
         # Determine the most likely disorder
-        most_likely_disorder = max(disorder_scores, key=disorder_scores.get)
+        most_likely_disorder = max(disorder_scores, key=disorder_scores.get) if max(disorder_scores, key=disorder_scores.get) !=0 else "None"
+
+        if(most_likely_disorder == "None"):
+            return render_template('healthy.html',user=session['firstname'])
+
+        
 
         if(most_likely_disorder == "Anxiety Disorder"):
             raag = "Bilawal"
@@ -320,7 +325,7 @@ def predict():
 
 
         # Pass prediction to result page
-        return render_template('result.html',user=user, prediction=most_likely_disorder,link1=link1,link2=link2,link3=link3,description=desc,actions1=firstAction,actions2=secondAction,actions3=thirdAction,actions4=forthAction,song1=song1,song2=song2,song3=song3, raaga=raag,timeOfDay=TOD)
+        return render_template('result.html',name=session['firstname'],user=user, prediction=most_likely_disorder,link1=link1,link2=link2,link3=link3,description=desc,actions1=firstAction,actions2=secondAction,actions3=thirdAction,actions4=forthAction,song1=song1,song2=song2,song3=song3, raaga=raag,timeOfDay=TOD)
     
     
      # membership
