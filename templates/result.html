@@ -75,6 +75,7 @@
             color:black;
             
         }
+    
         a {
             text-decoration: none;
             background-color:rgb(113, 21, 179);
@@ -164,6 +165,7 @@
             cursor: pointer; /* Pointer cursor on hover */
             transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+            position: center;
         }
 
         .buy-membership:hover {
@@ -212,17 +214,16 @@
                             
             {% endif %}
         </ul>
-        <p><b>
+        <p style="margin-left: 200px; "><b>
             We also suggest listening to songs with <strong>{{ raaga }}</strong> raagas at <strong>{{ timeOfDay }}</strong>.
         </p><b>
         {% if user.is_member %}
         <p>{{ description }}</p>
         {% else %}
-        <li>
             <div class="blurred-box">
-                <span class="blurred"><p>{{ description }}</p></span>
+                <span class="blurred"><p style="margin-left: 200px; margin-right: 200px; ">{{ description }}</p></span>
             </div>
-        </li>
+        
         {% endif %}
         <h3>Here are some suggested songs:</h3>
         <!-- <p><strong><a href="{{ link1 }}">{{ song1 }}</a></strong></p>
