@@ -48,12 +48,15 @@
         .nav-links {
             display: flex;
             gap: 2rem;
+            
         }
 
         .nav-links a {
             color: #fff;
             text-decoration: none;
             transition: color 0.3s ease;
+            font-size: larger;
+            margin-top: 20px;
         }
 
         .nav-links a:hover {
@@ -109,10 +112,11 @@
 
         /* Common Styles */
         h1 {
-            font-size: 2.8rem;
+            font-size: 3.5rem;
             color: #2c3e50;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            margin-bottom: 1.5rem;
+            margin-bottom: -2rem;
+            margin-top: 6rem;
             text-align: left;
         }
 
@@ -120,7 +124,7 @@
             font-size: 2rem;
             color: #2c3e50;
             margin-bottom: 1rem;
-            margin-top: 20px;
+            margin-top: -2rem;
         }
 
         h3 {
@@ -130,7 +134,9 @@
         }
 
         p {
-            margin-bottom: 1.5rem;
+            /* margin-bottom: 1.2rem; */
+            margin-top: 2rem;
+            font-size: 1.2rem;
             color: #666;
             text-align: flex;
 
@@ -163,13 +169,15 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
+            margin-top: 10px;
+            font-size: 1.2rem;
             transition: background-color 0.3s ease;
         }
 
         button:hover {
             background-color: #138a72;
         }
+
 
         .learn-more-btn {
             display: inline-block;
@@ -200,6 +208,8 @@
             padding-left: 20px;    /* Indents the list for proper alignment */
             margin: 20px 0;        /* Adds spacing around the list */
             text-align: left;      /* Ensures left alignment */
+            font-size: 1.2rem;
+            color: #666;
         }
 
         ul li {
@@ -266,7 +276,7 @@
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
-               >
+        
                 <!-- <li><a href="{{ url_for('login') }}">Login</a></li>
                 <li><a href="{{ url_for('register') }}">Register</a></li> -->
                 <form action="/logout" method="post">
@@ -301,7 +311,7 @@
 
             <div style="flex: 1;">
             <h2>About Us</h2>
-            <p>At MelowMind, we believe in the transformative power of music therapy and mental wellness. Our platform combines cutting-edge technology with therapeutic principles to provide personalized musical experiences for your mental well-being.</p>
+            <p>At MeloMind, we believe in the transformative power of music therapy and mental wellness. Our platform combines cutting-edge technology with therapeutic principles to provide personalized musical experiences for your mental well-being.</p>
             
             <div class="content-spacing"></div>
             <h3 style="width: 40%;">What We Offer:</h3>

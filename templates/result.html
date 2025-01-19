@@ -8,19 +8,23 @@
         body {
             font-family: 'Arial', sans-serif;
             background-image: url("/static/images/result bg.png"); 
-            /* background-color:burlywood; */
-            background-size: cover;
+            background-color:#e8b8a4;
+            background-size: contain;
             background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             color: #333;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
+            justify-content: flex-start;
+            min-height: 100vh;
             text-align: center;
             filter: contrast(10);
+            overflow: auto;
+            
         }
         h1 {
             font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -35,7 +39,7 @@
             margin-bottom: 20px;
         }
         p {
-            font-size: 1em;
+            font-size: 1.1em;
             margin-bottom: 18px; 
             text-align: left;
             line-height: 1.4;
@@ -54,14 +58,14 @@
 
         ul.bullet-list-1 {
             list-style-type:decimal;
-            padding-left: 100px;
+            padding-left: 250px;
             margin-top: 10px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             text-align: left;
         }
         ul.bullet-list-1 li {
             margin-bottom: 10px;
-            line-height: 1.4;
+            line-height: 1.6;
         }
 
         strong {
@@ -118,12 +122,17 @@
 
 
         .container {
-            max-width: 1000px;
-            padding: 10px;
+            max-width: 80%;
+            padding: 20px;
             background: transparent;
             border-radius: 10px;
             /* box-shadow: 0 4px 10px rgba(82, 222, 238, 0.1); */
             opacity: 0.80;
+            width: 1500px;
+            overflow: hidden; /* Ensure no content overflows */
+            margin: 20px 0; /* Add margin for spacing */
+            text-align: center;
+            
         }
 
         .blurred {
@@ -176,7 +185,7 @@
 <body>
     <div class="container">
         <h1>Diagnosis Result of {{name}}</h1>
-        <p>We are predicting that you may have: <strong>{{ prediction }}</strong></p>
+        <p style="margin-left: 400px;">We are predicting that you may have: <strong>{{ prediction }}</strong></p>
         <h3>Suggested actions:</h3>
         <ul class="bullet-list">
             <li>{{ actions1 }}</li>
