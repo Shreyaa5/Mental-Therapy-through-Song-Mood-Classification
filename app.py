@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 import numpy as np
-#from joblib import load
 import mysql.connector
 import re
 import razorpay
 import razorpay.errors
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -187,6 +188,15 @@ def predict():
         else:
             most_likely_disorder = "Healthy"
 
+        cur = sql_connection.cursor()
+        cur.execute('SELECT * FROM responses WHERE user_id = %s', (session['user_id'],))
+        if(cur.fetchone()):
+            cur.execute('UPDATE responses SET disorder = %s WHERE user_id = %s',(most_likely_disorder,session['user_id']))
+            sql_connection.commit()
+        else:
+            cur.execute('INSERT INTO responses (user_id, disorder) VALUES (%s, %s)', (session['user_id'],most_likely_disorder))
+            sql_connection.commit()
+
         if(most_likely_disorder == "Healthy"):
             return render_template('healthy.html',name=session['firstname'])
 
@@ -308,9 +318,7 @@ def predict():
             forthAction = "Cognitive Behavioral Therapy (CBT): Work with a therapist to address delusional thinking or distressing emotions."
 
         #Adding the latest predicted data in responses table
-        cur = sql_connection.cursor()
-        cur.execute('INSERT INTO responses (user_id, disorder) VALUES (%s, %s)', (session['user_id'],most_likely_disorder))
-        sql_connection.commit()
+        
 
 
         session['premium'] = user
@@ -383,6 +391,43 @@ def create_order():
     else:
         flash('Please log in to purchase membership.', 'error')
         return redirect(url_for('login.html'))
+
+# FOR ADMIN PURPOSES
+def get_google_form_responses():
+    scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+    creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+    client = gspread.authorize(creds)
+    
+    # Open the Google Sheet
+    sheet = client.open_by_key('1wk1YHybbJMZl7iDLeukzgpEL2DLd2IDcWDwU8AjMH50').sheet1
+    feedback_data = sheet.get_all_records()  # Get all form responses
+    return feedback_data
+
+@app.route('/admin_login', methods=['GET', 'POST'])
+def admin_login():
+    return render_template('admin_login.html')
+
+
+@app.route('/admin', methods=['POST'])
+def admin():
+    admin_user = request.form['admin_username']
+    admin_pass = request.form['admin_password']
+
+    if(admin_user != "admin" or admin_pass != "admin12345"):
+        return redirect(url_for('login'))
+    session['admin_logged_in'] = True
+    if 'admin_logged_in' not in session:
+        return redirect(url_for('login'))
+    
+    # Fetch current users from the database
+    cursor = sql_connection.cursor(dictionary=True)
+    cursor.execute("SELECT users.id, users.firstname, users.lastname, users.emailId, users.phoneNumber, users.membership, responses.disorder FROM users JOIN responses ON users.id = responses.user_id")  # Update query as per your database schema
+    users = cursor.fetchall()
+    
+    # Fetch feedback data from Google Forms
+    feedback_data = get_google_form_responses()
+    
+    return render_template('admin.html', users=users, feedback_data=feedback_data)
 
 
 if __name__ == '__main__':
