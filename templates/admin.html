@@ -25,8 +25,32 @@
             line-height: 1.4;
         }
 
+        .back-to-login {
+            position: absolute; 
+            text-decoration: none;
+            background-color:#00499c;
+            padding: 5px 10px;
+            border-radius: 5px;
+            top: 25px; 
+            right: 30px; 
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 20px;
+
+            }
+        .back-to-login a {
+                text-decoration: none;
+                color: white;
+            }
+
+        .back-to-login:hover {
+            background-color: #11017c; 
+            transform: scale(1.05); 
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
+}
+
+
         table {
-            width: 100%;
+            width: 95%;
             border-collapse: collapse;
         }
 
@@ -37,7 +61,7 @@
 
         th {
             background-color:#f7ead8;
-            text-align: left;
+            text-align: center;
         }
     </style>
 </head>
@@ -91,5 +115,10 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <div class="back-to-login">
+        <a href="{{ url_for('login') }}">Back to Login</a>
+    </div>
+
 </body>
 </html>
