@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 import numpy as np
-from joblib import load
+#from joblib import load
 import mysql.connector
 import re
+import razorpay
+import razorpay.errors
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -16,14 +18,25 @@ sql_connection = mysql.connector.connect(
         database = "flask_ml_db",
         port = "3316"
     )
-# Load ML model
-#model = load('model.sav')
 
-# Home Page
+RAZORPAY_KEY_ID = "rzp_test_iXumXBu7UMOLEf"
+RAZORPAY_KEY_SECRET = "DbnMUMaSxdlLkTNCZ0ruZb7R"
+
+razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID,RAZORPAY_KEY_SECRET))
+
+#landing
 @app.route('/')
 def home():
     if 'loggedin' in session:
-        return render_template('home.html')
+        return render_template('landing.html')
+    else:
+        return redirect(url_for('login'))
+
+#Diagnosis
+@app.route('/diagnosis')
+def diagnosis():
+    if 'loggedin' in session:
+        return render_template('diagnosis.html')
     else:
         return redirect(url_for('login'))
 
@@ -83,6 +96,7 @@ def login():
                 session['username'] = username
                 session['user_id'] = user[0]
                 session['firstname'] = user[3]
+                session['membership'] = user[7]
                 return redirect(url_for('home'))
             else:
                 flash("Invalid login credentials", "error")
@@ -103,28 +117,9 @@ def startDiagnosis():
 
     else:
         flash("Please login before diagnosis.","message")
-        return(render_template('home.html'))
+        return(render_template('landing.html'))
     
-#################################################################
-# #Questionnaire2  
-# @app.route('/questionnaire2', methods=['POST'])
-# def questionnaire2():
-#     answer1=[request.form['question1'],
-#             request.form['question2'],
-#             request.form['question3'],
-#             request.form['question4'],
-#             request.form['question5'],
-#             request.form['question6'],
-#             request.form['question7'],
-#             request.form['question8'],
-#             request.form['question9'],
-#             request.form['question10'],
-#             request.form['question11'],
-#             request.form['question12'],
-#             request.form['question13']]
-#     session['answer']= answer1
-#     return(render_template('Questionnaire2.html'))
-############################################################
+
 
 #Questionnaire2  
 @app.route('/questionnaire2', methods=['POST'])
@@ -141,43 +136,12 @@ def questionnaire2():
     except:
         flash("Please fill every field","message")
         return(render_template('Questionnaire1.html',user=session['firstname']))
+        return(render_template('Questionnaire1.html',user=session['firstname']))
     session['answer']= answer1
     return(render_template('Questionnaire2.html',user=session['firstname']))
 
     
     
-# Result Route (Display prediction)
-@app.route('/result')
-def result():
-    return render_template('result.html')
-
-# # Prediction API (to interact with the ML model)
-# @app.route('/predict', methods=['POST'])
-# def predict():
-#     if request.method == 'POST':
-#         # Get user form input (Yes/No answers)
-#         answers2 = [
-#             request.form['question14'],
-#             request.form['question15'],
-#             request.form['question16'],
-#             request.form['question17'],
-#             request.form['question18'],
-#             request.form['question19'],
-#             request.form['question20'],
-#             request.form['question21'],
-#             request.form['question22'],
-#             request.form['question23'],
-#             request.form['question24'],
-#             request.form['question25'],
-#             request.form['question26'],
-#             request.form['question27']
-#         ]
-#         answers=[]
-#         answers.extend(session['answer']) 
-#         answers.extend(answers2)
-
-############################################################
-# Prediction API (to interact with the ML model)
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
@@ -202,16 +166,10 @@ def predict():
         # Convert answers to numerical values (e.g., Yes = 1, No = 0)
         answers = [1 if answer == 'Yes' else 0 for answer in answers]
 
-        #####################################################################
-        # # Convert to numpy array and reshape for the model
-        # features = np.array(answers).reshape(1, -1)
-        
-        # # Predict using the ML model
-        # prediction = model.predict(features)
-        
-        # # Return the result to the user
-        # return render_template('result.html', prediction=prediction[0])
-        #####################################################################
+       
+        user = {
+            'is_member': True if session['membership'] == "active" else False
+        }
 
         # Logic to calculate disorder scores
 
@@ -225,7 +183,15 @@ def predict():
         }
 
         # Determine the most likely disorder
-        most_likely_disorder = max(disorder_scores, key=disorder_scores.get)
+        if disorder_scores[max(disorder_scores, key=disorder_scores.get)] !=0:
+            most_likely_disorder = max(disorder_scores, key=disorder_scores.get)  
+        else:
+            most_likely_disorder = "Healthy"
+
+        if(most_likely_disorder == "Healthy"):
+            return render_template('healthy.html',name=session['firstname'])
+
+        
 
         if(most_likely_disorder == "Anxiety Disorder"):
             raag = "Bilawal"
@@ -342,8 +308,82 @@ def predict():
             thirdAction = "Establishing Hygiene Routines: Create a checklist for daily self-care tasks like bathing, grooming, and dressing."
             forthAction = "Cognitive Behavioral Therapy (CBT): Work with a therapist to address delusional thinking or distressing emotions."
 
+        #Adding the latest predicted data in responses table
+        cur = sql_connection.cursor()
+        cur.execute('INSERT INTO responses (user_id, disorder) VALUES (%s, %s)', (session['user_id'],most_likely_disorder))
+        sql_connection.commit()
+
+
+        session['premium'] = user
+        session['disorder'] = most_likely_disorder
+        session['link1'] = link1
+        session['link2'] = link2
+        session['link3'] = link3
+        session['desc'] = desc
+        session['a1'] = firstAction
+        session['a2'] = secondAction
+        session['a3'] = thirdAction
+        session['a4'] = forthAction
+        session['s1'] = song1
+        session['s2'] = song2
+        session['s3'] = song3
+        session['raag'] = raag
+        session['tod'] = TOD
+
+
+
+
+
         # Pass prediction to result page
-        return render_template('result.html', prediction=most_likely_disorder,link1=link1,link2=link2,link3=link3,description=desc,actions1=firstAction,actions2=secondAction,actions3=thirdAction,actions4=forthAction,song1=song1,song2=song2,song3=song3, raaga=raag,timeOfDay=TOD)
+        return render_template('result.html',name=session['firstname'],user=user, prediction=most_likely_disorder,link1=link1,link2=link2,link3=link3,description=desc,actions1=firstAction,actions2=secondAction,actions3=thirdAction,actions4=forthAction,song1=song1,song2=song2,song3=song3, raaga=raag,timeOfDay=TOD)
+    
+    
+     # membership
+@app.route('/membership', methods=['POST'])
+def membership():
+        if request.method == 'POST':    
+            return render_template('membership.html',key_id=RAZORPAY_KEY_ID)
+
+@app.route('/verify', methods=['POST'])
+def verify_payment():
+    #Get Data From Razorpay checkout
+        payment_id = request.form.get("razorpay_payment_id")
+        order_id = request.form.get("razorpay_order_id")
+        signature = request.form.get("razorpay_signature")
+        #Verify signature
+        try:
+            razorpay_client.utility.verify_payment_signature({
+                "razorpay_payment_id": payment_id,
+                "razorpay_order_id": order_id,
+                "razorpay_signature": signature
+            })
+            #Update membership status
+            user_id = session['user_id']
+            cur = sql_connection.cursor()
+            cur.execute('UPDATE users SET membership = "active" WHERE id = %s', (user_id,))
+            sql_connection.commit()
+            session['membership'] = "active"
+            flash("Membership activated successfully!", "success")
+            #return redirect(url_for('home'))
+            return render_template('result.html',user={'is_member':True}, prediction=session['disorder'],link1=session['link1'],link2=session['link2'],link3=session['link3'],description=session['desc'],actions1=session['a1'],actions2=session['a2'],actions3=session['a3'],actions4=session['a4'],song1=session['s1'],song2=session['s2'],song3=session['s3'], raaga=session['raag'],timeOfDay=session['tod'])
+        except razorpay.errors.SignatureVerificationError:
+            flash("Signature verification failed", "error")
+            return render_template('membership.html',key_id=RAZORPAY_KEY_ID)
+
+        
+@app.route('/order', methods=['POST'])
+def create_order():
+    if 'loggedin' in session:
+        amount = 9900 #In Paise
+        currency = "INR"
+
+        order_data = {"amount":amount,
+                      "currency":currency }
+        razorpay_order = razorpay_client.order.create(data=order_data)
+        return{"order_id":razorpay_order['id'],"amount":amount}
+    else:
+        flash('Please log in to purchase membership.', 'error')
+        return redirect(url_for('login.html'))
 
 
 if __name__ == '__main__':

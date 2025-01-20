@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+
+        .bold-text {
+         font-weight: bold;
+         font-size: 18px;
+         font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .welcome-text {
+            position: relative;
+            left: 170px; /* Adjust this value as needed */
+            text-align: left;
+        }
+
+
+
+        .home-page {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align:left;
+            /* background-color: #ffffff; */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            left: 300px;
+            margin-top: 120px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            color: #16a085;
+            margin-top: 30px;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color:#16a085;
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .logout-button {
+            padding: 10px 20px;
+            font-size: 14px;
+            transform: scale(1.05);
+            color: #fff;
+            background-color:darkturquoise; /*  color for logout */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button :hover {
+            background-color:aqua; /*  for hover */
+        }
+
+        .diagnosis-section {
+            margin: 30px 0;
+        }
+
+        .diagnosis-section button {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color:darkcyan; /* Blue color for start diagnosis */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transform: scale(1.05);
+            transition: background-color 0.3s ease;
+        }
+
+        .diagnosis-section button:hover {
+            background-color: hsl(211, 100%, 35%); /* Darker blue for hover */
+        }
+
+        
+       
+
+
+        /* .profile-button {
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            background-color: darkcyan;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .status-new {
+            background-color: #ffd700;
+        }
+
+        .status-member {
+            background-color: #32cd32;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: -50%;
+            background-color:transparent;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 8px;
+            margin-top: 5px;
+            display: none;
+            min-width: 120px;
+        }
+
+        .profile-button:hover .profile-dropdown {
+            display: block;
+            background-color: #008b8b;
+        }
+
+
+        .profile-info {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .membership-actions button {
+            padding: 8px 16px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        } */
+
+        .flash-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .flash-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        
+
+
+
+        @media (max-width: 600px) {
+            .home-page {
+                padding: 15px;
+            }
+
+            h2, h3 , h4 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- <div class="logout-button">
+        <form action="/logout" method="post">
+            <button type="submit">Log out</button>
+        </form>
+    </div> -->
+
+    <!-- <header class="header">
+        <div class="header-content">
+            <div class="profile-button">
+                <button class="button">
+                    Profile
+                    <span class="status-indicator status-new"></span>
+                </button>
+                <div class="profile-dropdown">
+                    <div>New User</div>
+                    <button class="button" style="margin-top: 0.5rem; width: 100%;">Buy membership</button>
+                </div>
+            </div>
+        </div>
+    </header> -->
+
+    <div class="home-page">
+        <h1 class="welcome-text">Let's start the Diagnosis</h1>
+        <p>
+            Your companion in mental wellness. Here, we believe in the healing power of self-awareness 
+            and the transformative energy of music. Our unique platform guides you through a personalized 
+            journey, helping you explore your mental health with insight, care, and compassion.
+        </p>
+
+        <h3>How It Works:</h3>
+        <p>
+            Through a series of thoughtfully designed questions, we’ll help you identify areas of stress, 
+            anxiety, or imbalance. Our approach is simple and supportive, focused on helping you understand 
+            yourself better without judgment.
+        </p>
+
+        <h3>Personalized Music for Mind & Soul</h3>
+        <p>
+            Once we've helped you uncover patterns in your mental health, we’ll curate a playlist tailored 
+            just for you. Each piece is selected to comfort, inspire, and uplift—based on research and insights 
+            from the world of music therapy.
+        </p>
+
+        <h3>Explore. Heal. Grow.</h2>
+
+        <div class="diagnosis-section">
+            <p class="bold-text">We are providing multiple diagnoses for mental health disorders. If you want, press the button and start diagnosis</p>
+            <form action="/startDiagnosis" method="post">
+                <button type="submit">Start Diagnosis</button>
+                
+            </form>
+        </div>
+
+        <div id="flash-messages"></div>
+        <script>
+            // Flash message handling
+            function showFlashMessage(message, category) {
+                const flashDiv = document.createElement('div');
+                flashDiv.className = `flash-message ${category}`;
+                flashDiv.textContent = message;
+                document.getElementById('flash-messages').appendChild(flashDiv);
+                
+                setTimeout(() => {
+                    flashDiv.remove();
+                }, 5000);
+            }
+        </script>
+
+        
+
+    </div>
+</body>
+</html>
