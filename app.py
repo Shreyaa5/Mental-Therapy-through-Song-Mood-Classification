@@ -365,7 +365,7 @@ def verify_payment():
             session['membership'] = "active"
             flash("Membership activated successfully!", "success")
             #return redirect(url_for('home'))
-            return render_template('result.html',user={'is_member':True}, prediction=session['disorder'],link1=session['link1'],link2=session['link2'],link3=session['link3'],description=session['desc'],actions1=session['a1'],actions2=session['a2'],actions3=session['a3'],actions4=session['a4'],song1=session['s1'],song2=session['s2'],song3=session['s3'], raaga=session['raag'],timeOfDay=session['tod'])
+            return render_template('result.html',name=session['firstname'],user={'is_member':True}, prediction=session['disorder'],link1=session['link1'],link2=session['link2'],link3=session['link3'],description=session['desc'],actions1=session['a1'],actions2=session['a2'],actions3=session['a3'],actions4=session['a4'],song1=session['s1'],song2=session['s2'],song3=session['s3'], raaga=session['raag'],timeOfDay=session['tod'])
         except razorpay.errors.SignatureVerificationError:
             flash("Signature verification failed", "error")
             return render_template('membership.html',key_id=RAZORPAY_KEY_ID)
