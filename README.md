@@ -5,7 +5,8 @@ classify songs by mood and recommend personalized playlists.
 ### Project Overview
 
 In collaboration with esteemed guidance from Prof. Sudipta Chakrabarty, a prominent faculty member of the Department of Computer Science and Engineering - Artificial Intelligence and Machine Learning (CSE-AIML) and Computer Science and Engineering - Data Science (CSE-DS) at Techno Main Salt Lake, our team embarked on an exciting journey to develop this mood prediction model.
-
+###
+Run this command to install dependencies : pip install -r ./requirement.txt
 ### Contributors
 
 This ambitious project was a collective effort, demonstrating the strength of collaboration and teamwork:
