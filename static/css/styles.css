@@ -88,41 +88,6 @@ button {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
 }
 
-    /* margin: 0;
-    background-image: url("/static/images/bg.png");
-    background-size: cover;
-    background-position: center; */
-
-    
-/* .container {
-    background-color: rgba(255, 255, 255, 0.6); 
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(115, 221, 115, 0.5);
-    width: 400px;
-    text-align: left;
-    position: relative;
-    top:10px;
-    left:-450px;
-    align-self:flex-start;
-} */
-
-
-/* h3 {
-    color:darkslategrey;
-    text-align: left;
-}
-
-h1 {
-    color:cadetblue;
-    text-align: center;
-}
-
-form {
-    display:grid;
-    flex-direction:column;
-    align-items: center;
-} */
 
 /* .question {
     margin-bottom: 20px;
