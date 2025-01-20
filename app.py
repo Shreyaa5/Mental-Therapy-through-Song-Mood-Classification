@@ -136,6 +136,7 @@ def questionnaire2():
     except:
         flash("Please fill every field","message")
         return(render_template('Questionnaire1.html',user=session['firstname']))
+        return(render_template('Questionnaire1.html',user=session['firstname']))
     session['answer']= answer1
     return(render_template('Questionnaire2.html',user=session['firstname']))
 
