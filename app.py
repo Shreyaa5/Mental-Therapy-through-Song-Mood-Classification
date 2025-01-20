@@ -395,7 +395,7 @@ def create_order():
 # FOR ADMIN PURPOSES
 def get_google_form_responses():
     scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-    creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name('C:/Users/ShreyaPaul/Documents/coding/Mental-Therapy-through-Song-Mood-Classification/credentials.json', scope)
     client = gspread.authorize(creds)
     
     # Open the Google Sheet
