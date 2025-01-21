@@ -163,12 +163,19 @@
         }
 
         .flash-message {
-            padding: 10px;
-            margin-bottom: 15px;
+            position: fixed; /* Position relative to the viewport */
+            top: 8%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust for the element's own dimensions */
+            padding: 10px 20px;
             border-radius: 5px;
             text-align: center;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
+            z-index: 1000; /* Ensures it appears above other elements */
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: opacity 1s ease;
         }
 
         .flash-message.success {
@@ -181,6 +188,7 @@
             color: #721c24;
             background-color: #f8d7da;
             border: 1px solid #f5c6cb;
+
         }
 
         button {
@@ -335,6 +343,20 @@
             
         </div>
     </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const flashMessage = document.querySelector(".flash-message");
+            if (flashMessage) {
+                setTimeout(() => {
+                    flashMessage.style.opacity = "0";
+                    setTimeout(() => {
+                        flashMessage.remove(); // Remove it from the DOM after fading out
+                    }, 1000); // Wait for the fade-out transition to complete
+                }, 4000); // Time in milliseconds before the message fades out
+            }
+        });
+    </script>
+    
 
     <section id="about">
         <div class="section-content">
