@@ -162,6 +162,27 @@
             font-size: 1rem;
         }
 
+        .flash-message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .flash-message.success {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        .flash-message.error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+
         button {
             padding: 0.8rem 2rem;
             background-color: #16a085;
@@ -273,6 +294,13 @@
 <body>
     <nav>
         <div class="nav-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <a href="#home" class="logo">MelowMind</a>
             <div class="nav-links">
                 <a href="#home">Home</a>
@@ -342,7 +370,7 @@
             <h2>Contact Us</h2>
             <p>Have questions or feedback? We'd love to hear from you!</p>
             
-            <form class="contact-form">
+            <form class="contact-form" action="/contactUs" method="post">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" required>

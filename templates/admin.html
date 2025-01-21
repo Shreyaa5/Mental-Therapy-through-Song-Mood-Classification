@@ -68,6 +68,48 @@
 <body>
     <h1>Admin Dashboard</h1>
 
+    <h2>Messages</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for msg in message %}
+            <tr>
+                <td>{{ msg.user_id }}</td>
+                <td>{{ msg.name }}</td>
+                <td>{{ msg.email }}</td>
+                <td>{{ msg.text }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Feedback Data</h2>
+    <table>
+        <thead>
+            <tr>
+                {% for key in feedback_data[0].keys() %}
+                <th>{{ key }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in feedback_data %}
+            <tr>
+                {% for value in feedback.values() %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <h2>Current Users</h2>
     <table>
         <thead>
@@ -96,25 +138,7 @@
         </tbody>
     </table>
 
-    <h2>Feedback Data</h2>
-    <table>
-        <thead>
-            <tr>
-                {% for key in feedback_data[0].keys() %}
-                <th>{{ key }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for feedback in feedback_data %}
-            <tr>
-                {% for value in feedback.values() %}
-                <td>{{ value }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    
 
     <div class="back-to-login">
         <a href="{{ url_for('login') }}">Back to Login</a>

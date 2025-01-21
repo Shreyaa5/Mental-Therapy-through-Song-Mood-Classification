@@ -421,13 +421,41 @@ def admin():
     
     # Fetch current users from the database
     cursor = sql_connection.cursor(dictionary=True)
-    cursor.execute("SELECT users.id, users.firstname, users.lastname, users.emailId, users.phoneNumber, users.membership, responses.disorder FROM users JOIN responses ON users.id = responses.user_id")  # Update query as per your database schema
+    cursor.execute("SELECT users.id, users.firstname, users.lastname, users.emailId, users.phoneNumber, users.membership, responses.disorder FROM users JOIN responses ON users.id = responses.user_id")
     users = cursor.fetchall()
+
+    cursor.execute("SELECT user_id, name, email, text FROM message")
+    msg = cursor.fetchall()
     
     # Fetch feedback data from Google Forms
     feedback_data = get_google_form_responses()
     
-    return render_template('admin.html', users=users, feedback_data=feedback_data)
+    return render_template('admin.html', users=users, feedback_data=feedback_data,message=msg)
+
+@app.route('/contactUs', methods=['POST'])
+def contactUs():
+    if 'loggedin' not in session:
+        return render_template('login.html')
+    name = request.form['name']
+    email = request.form['email']
+    msg = request.form['message']
+
+    if name==None or email==None or msg==None:
+        flash("Fill all boxes", "error")
+        return render_template('landing.html')
+
+    if(email.startswith('_') or not((re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',email)))):
+        flash("Enter Valid Email", "error")
+        return render_template('landing.html')
+
+
+    cur = sql_connection.cursor()
+    cur.execute('INSERT INTO message (user_id, name, email, text) VALUES (%s, %s, %s, %s)', (session['user_id'], name, email, msg))
+    sql_connection.commit()
+
+    flash("Sent Message Succesfully", "success")
+    return render_template('landing.html')
+
 
 
 if __name__ == '__main__':

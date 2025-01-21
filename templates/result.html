@@ -44,6 +44,26 @@
             text-align: left;
             line-height: 1.4;
         }
+        .flash-message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .flash-message.success {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        .flash-message.error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
         ul.bullet-list {
             list-style-type:disc;
             padding-left: 50px;
@@ -211,6 +231,13 @@
 </head>
 <body>
     <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
         <h1>Diagnosis Result of {{name}}</h1>
         <p style="text-align: center;font-size: 1.6em;">We are predicting that you may have: <strong>{{ prediction }}</strong></p>
         <h2 >Suggested actions:</h2>
