@@ -45,18 +45,30 @@
             line-height: 1.4;
         }
         .flash-message {
-            padding: 10px;
+            padding: 10px 10px;
             margin-bottom: 15px;
             border-radius: 5px;
             text-align: center;
-            font-size: 14px;
+            font-size: 15px;
+            position: fixed; /* Position relative to the viewport */
+            top: 8%;
+            min-width: 300px;
+            max-width: 30%;
             font-weight: bold;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Adjust for the element's own dimensions */
+            z-index: 1000; /* Ensures it appears above other elements */
+            background-color: transparent;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: opacity 1s ease;
+            
         }
 
         .flash-message.success {
             color: #155724;
             background-color: #d4edda;
-            border: 1px solid #c3e6cb;
+            border: 1px solid #c3f3ce;
         }
 
         .flash-message.error {
