@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question-Answer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: aquamarine;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: transparent;
+            max-width: 600px;
+            height: 400px;
+            margin: 150px auto;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 30px;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 25px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Answer the Following Questions</h2>
+        <form action="/predict" method="POST">
+            <label for="q1">How are you feeling today?</label>
+            <input type="text" id="q1" name="q1" placeholder="Enter your mood..." required>
+            
+            <label for="q2">What is something that made you happy recently?</label>
+            <input type="text" id="q2" name="q2" placeholder="Describe a happy moment..." required>
+            
+            <label for="q3">Do you prefer energetic or calming music right now?</label>
+            <input type="text" id="q3" name="q3" placeholder="Energetic or calming?" required>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
